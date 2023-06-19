@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.Pages
+namespace AdvancedTask.Pages.ProfilePage
 {
-    internal class ProfilePage
+    internal class Certification
     {
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.Test
+namespace AdvancedTask.Pages.ProfilePage
 {
-    internal class Profile_Tests
+    internal class Language
     {
-
     }
 }
