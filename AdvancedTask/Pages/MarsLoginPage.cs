@@ -1,4 +1,4 @@
-﻿using AdvancedTask.Models;
+﻿using AdvancedTask.JSON_Objects;
 using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -15,7 +15,7 @@ namespace AdvancedTask.Pages
     {
         readonly IWebDriver driver; 
         public MarsLoginPage(IWebDriver driver) { this.driver = driver;}
-        public bool Register(User user)
+        public bool Register(UserObject user)
         {            
             //Registration
             //Click on join buton
@@ -65,7 +65,7 @@ namespace AdvancedTask.Pages
         {
             new Actions(driver).SendKeys(Keys.Escape).SendKeys(Keys.Escape).Perform();
         }
-        public void Login(User user)
+        public void Login(UserObject user)
         {           
             //Sign in Mars portal
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"home\"]/div/div/div[1]/div/a", 10);
@@ -85,7 +85,7 @@ namespace AdvancedTask.Pages
             Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/span", 10);      
             return userName.Text;
         }
-        public void RegisterAndLogin(User user)
+        public void RegisterAndLogin(UserObject user)
         {
             Register(user);
             Login(user);    

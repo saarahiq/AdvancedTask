@@ -25,12 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Test\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\TestUser.json">
+    <None Update="JSONData\User\testUser.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

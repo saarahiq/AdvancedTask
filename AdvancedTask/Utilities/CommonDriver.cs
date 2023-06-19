@@ -1,4 +1,4 @@
-﻿using AdvancedTask.Models;
+﻿using AdvancedTask.JSON_Objects;
 using AdvancedTask.Pages;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -16,7 +16,7 @@ namespace AdvancedTask.Utilities
     public class CommonDriver
     {
         public IWebDriver driver;
-        public User testUser;
+        public UserObject testUser;
         public MarsLoginPage marsLoginPage;
 
         //Page object initialization
@@ -25,7 +25,7 @@ namespace AdvancedTask.Utilities
         {
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
-            this.testUser = ReadTestUser("Data\\TestUser.json");
+            this.testUser = ReadTestUser("JSONData\\User\\testUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
             //Launch Mars portal
@@ -34,10 +34,10 @@ namespace AdvancedTask.Utilities
          
         }
        
-        public static User ReadTestUser(string path)
+        public static UserObject ReadTestUser(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<User>(json);
+            return JsonConvert.DeserializeObject<UserObject>(json);
         }
     }
 }
