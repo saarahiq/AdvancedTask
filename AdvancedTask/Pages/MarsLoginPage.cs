@@ -40,25 +40,17 @@ namespace AdvancedTask.Pages
             
             //Click on submit button
             
-            try
-            {
-                Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"submit-btn\"]", 2);
-            }
-            catch (Exception ex)
-            {
-                QuitDialog();
-                return false;
-            }
             submitButton.Click();
             try
             {
-                Wait.WaitToBeVisible(driver, "XPath", "/html/body/div[2]/div/div/form/div[3]/div", 10);
-                QuitDialog();
-                return false;
+                Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
+                return true;
             }
             catch (Exception ex)
             {
-                return true;
+                
+                QuitDialog();
+                return false;
             }
         }
         public void QuitDialog()

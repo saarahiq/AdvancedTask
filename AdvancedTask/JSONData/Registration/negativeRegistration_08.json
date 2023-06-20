@@ -1,0 +1,8 @@
+{
+  "FirstName": "Ada",
+  "LastName": "Zhang",
+  "Email": "ada.whz5200@example.com",
+  "Password": "123456",
+  "ConfirmationPassword": "12345",
+  "AgreeToTC": true
+}
