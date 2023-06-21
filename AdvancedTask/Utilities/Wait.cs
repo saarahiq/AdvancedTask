@@ -32,6 +32,7 @@ namespace AdvancedTask.Utilities
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.LinkText(locatorValue)));
             }
+           
 
         }
 
@@ -52,7 +53,7 @@ namespace AdvancedTask.Utilities
             if (locatorType == "CssSelector")
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(locatorValue)));
-            }
+            }            
         }
     }
 }

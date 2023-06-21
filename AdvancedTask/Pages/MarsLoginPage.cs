@@ -1,4 +1,4 @@
-﻿using AdvancedTask.Models;
+﻿using AdvancedTask.JSON_Objects;
 using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -15,7 +15,7 @@ namespace AdvancedTask.Pages
     {
         readonly IWebDriver driver; 
         public MarsLoginPage(IWebDriver driver) { this.driver = driver;}
-        public bool Register(User user)
+        public bool Register(UserObject user)
         {            
             //Registration
             //Click on join buton
@@ -40,32 +40,24 @@ namespace AdvancedTask.Pages
             
             //Click on submit button
             
-            try
-            {
-                Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"submit-btn\"]", 2);
-            }
-            catch (Exception ex)
-            {
-                QuitDialog();
-                return false;
-            }
             submitButton.Click();
             try
             {
-                Wait.WaitToBeVisible(driver, "XPath", "/html/body/div[2]/div/div/form/div[3]/div", 10);
-                QuitDialog();
-                return false;
+                Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
+                return true;
             }
             catch (Exception ex)
             {
-                return true;
+                
+                QuitDialog();
+                return false;
             }
         }
         public void QuitDialog()
         {
             new Actions(driver).SendKeys(Keys.Escape).SendKeys(Keys.Escape).Perform();
         }
-        public void Login(User user)
+        public void Login(UserObject user)
         {           
             //Sign in Mars portal
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"home\"]/div/div/div[1]/div/a", 10);
@@ -85,7 +77,7 @@ namespace AdvancedTask.Pages
             Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/span", 10);      
             return userName.Text;
         }
-        public void RegisterAndLogin(User user)
+        public void RegisterAndLogin(UserObject user)
         {
             Register(user);
             Login(user);    
