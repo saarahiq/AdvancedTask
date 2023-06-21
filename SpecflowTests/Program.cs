@@ -1,4 +1,4 @@
-﻿namespace AdvancedTask
+﻿namespace SpecflowTests
 {
     internal class Program
     {
