@@ -57,7 +57,7 @@ namespace AdvancedTask.Pages
         {
             new Actions(driver).SendKeys(Keys.Escape).SendKeys(Keys.Escape).Perform();
         }
-        public void Login(UserObject user)
+        public bool Login(UserObject user)
         {           
             //Sign in Mars portal
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"home\"]/div/div/div[1]/div/a", 10);
@@ -70,7 +70,19 @@ namespace AdvancedTask.Pages
             //Identify remember me checkbox and click
             //rememberMeCheckbox.Click();
             //Identify login button and click
-            loginButton.Click();            
+            loginButton.Click();
+            try
+            {
+                GetUsername();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                QuitDialog();
+                return false;
+            }
+
         }
         public string GetUsername()
         {
@@ -79,8 +91,11 @@ namespace AdvancedTask.Pages
         }
         public void RegisterAndLogin(UserObject user)
         {
-            Register(user);
-            Login(user);    
+           if (!Login(user)) 
+            { 
+                Register(user); 
+                Login(user);
+            }
         }
         private IWebElement joinButton => driver.FindElement(By.XPath("//*[@id=\"home\"]/div/div/div[1]/div/button"));
         private IWebElement firstNameTextbox => driver.FindElement(By.XPath("/html/body/div[2]/div/div/form/div[1]/input"));
