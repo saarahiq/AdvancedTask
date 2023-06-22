@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdvancedTask.Pages.ProfilePage;
 
 namespace AdvancedTask.Utilities
 {
@@ -21,6 +22,7 @@ namespace AdvancedTask.Utilities
         public IWebDriver driver;
         public UserObject testUser;
         public MarsLoginPage marsLoginPage;
+        public Language languagePage;
         private bool login;
         public CommonDriver() : this(true) { }
         public CommonDriver(bool login) { this.login = login; }
@@ -33,6 +35,7 @@ namespace AdvancedTask.Utilities
         {
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
+            this.languagePage = new Language(driver);
             this.testUser = ReadTestUser("JSONData\\testUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
@@ -49,6 +52,11 @@ namespace AdvancedTask.Utilities
         {
             var json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<UserObject>(json);
+        }
+        public static LanguageObject ReadTestLanguage(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<LanguageObject>(json);
         }
 
         [TearDown]
