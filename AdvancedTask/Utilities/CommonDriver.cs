@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,14 +31,27 @@ namespace AdvancedTask.Utilities
             driver.Manage().Window.Maximize();
             //Launch Mars portal
             driver.Navigate().GoToUrl("http://localhost:5000");
-            marsLoginPage.RegisterAndLogin(this.testUser);
+            marsLoginPage.Login(this.testUser);
          
         }
-       
+
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Close();
+            driver.Quit();
+
+        }
+
         public static User ReadTestUser(string path)
         {
             var json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<User>(json);
+        }
+        public static CertificationModel readCertification(string certFile)
+        {
+            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Certifications\\", certFile));
+            return JsonConvert.DeserializeObject<CertificationModel>(json);
         }
     }
 }

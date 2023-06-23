@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.JSON_Objects
+namespace AdvancedTask.Models
 {
-    public class SkillObject
+    public class SkillModel
     {
         public string skill { get; set; }
         public string skillLevel { get; set; }
     }
-    
+
 }
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.JSON_Objects
+namespace AdvancedTask.Models
 {
-    public class EducationObject
+    public class EducationModel
     {
         public string universityName { get; set; }
         public string country { get; set; }
