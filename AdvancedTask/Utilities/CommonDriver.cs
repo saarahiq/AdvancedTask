@@ -48,10 +48,15 @@ namespace AdvancedTask.Utilities
             var json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<User>(json);
         }
-        public static CertificationModel readCertification(string certFile)
+        public static CertificationModel readCertification(string jsonCertFile)
         {
-            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Certifications\\", certFile));
+            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Certifications\\", jsonCertFile));
             return JsonConvert.DeserializeObject<CertificationModel>(json);
+        }
+        public static SkillModel readSkills(string jsonSkillFile)
+        {
+            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Skills\\", jsonSkillFile));
+            return JsonConvert.DeserializeObject<SkillModel>(json);
         }
     }
 }

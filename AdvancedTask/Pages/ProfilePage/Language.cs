@@ -8,5 +8,6 @@ namespace AdvancedTask.Pages.ProfilePage
 {
     internal class Language
     {
+
     }
 }
