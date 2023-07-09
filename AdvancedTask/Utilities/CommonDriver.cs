@@ -26,7 +26,7 @@ namespace AdvancedTask.Utilities
         {
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
-            this.testUser = ReadTestUser("Data\\TestUser.json");
+            this.testUser = ReadTestUser("JSONData\\TestUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
             //Launch Mars portal
@@ -50,13 +50,23 @@ namespace AdvancedTask.Utilities
         }
         public static CertificationModel readCertification(string jsonCertFile)
         {
-            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Certifications\\", jsonCertFile));
+            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Certifications\", jsonCertFile));
             return JsonConvert.DeserializeObject<CertificationModel>(json);
         }
         public static SkillModel readSkills(string jsonSkillFile)
         {
-            var json = File.ReadAllText(String.Concat("C:\\Users\\saara\\source\\repos\\AdvancedTask\\AdvancedTask\\JSONData\\Skills\\", jsonSkillFile));
+            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Skills\", jsonSkillFile));
             return JsonConvert.DeserializeObject<SkillModel>(json);
+        }
+        public static EducationModel readEducation(string jsonEducationFile)
+        {
+            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Education\", jsonEducationFile));
+            return JsonConvert.DeserializeObject<EducationModel>(json);
+        }
+        public static ShareSkillModel readShareSkill(string jsonShareSkillFile)
+        {
+            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\EditShareSkill\", jsonShareSkillFile));
+            return JsonConvert.DeserializeObject<ShareSkillModel>(json);
         }
     }
 }

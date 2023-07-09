@@ -1,0 +1,30 @@
+﻿{
+  "title": "$#",
+  "description": "Provide Data driven solutions",
+  "category": "Business",
+  "subCategory": "Legal Consulting",
+  "tags": [ "Document Writing", "Data Analysis" ],
+  "serviceType": "Hourly basis service",
+  "locationType": "Online",
+  "availableDays": {
+    "startDate": "07/04/2023",
+    "EndDate": "08/04/2023",
+    "days": {
+      "Mon": {
+        "startTime": "09:00 AM",
+        "endTime": "10:00 PM"
+      },
+      "Tue": {
+        "startTime": "12:30 PM",
+        "endTime": "02:00 PM"
+      },
+      "Wed": {
+        "startTime": "08:15 AM",
+        "endTime": "11:00 AM"
+      }
+    }
+  },
+  "skillTrade": "Skill-Exchange",
+  "skillExchange": "Data Analysis",
+  "active": "Active"
+}

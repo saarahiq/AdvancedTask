@@ -3,6 +3,7 @@ using AdvancedTask.Pages.ProfilePage;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -128,9 +129,9 @@ namespace AdvancedTask.Test
             Certification certificationPage = new Certification(driver);
             certificationPage.editCertification(negativeCertification.certificate, negativeCertification.certifiedFrom, negativeCertification.year);
 
-            //// Check if the New Certification record has not been edited
-            //string popUpMessage = certificationPage.getPopUpMessage();
-            //Assert.AreEqual("Please enter Certification Name, Certification From and Certification Year", popUpMessage, "Actual and expected certification record do not match.");
+            //Check if the New Certification record has not been edited
+            string popUpMessage = certificationPage.getPopUpMessage();
+            Assert.AreEqual("Please enter Certification Name, Certification From and Certification Year", popUpMessage, "Actual and expected certification record do not match.");
 
         }
         [Test, Order(6), Description("Delete an existing Certification")]
