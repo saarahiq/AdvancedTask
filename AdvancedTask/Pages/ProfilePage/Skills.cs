@@ -58,7 +58,9 @@ namespace AdvancedTask.Pages.ProfilePage
             //Click on edit
             editButton.Click();
             //Edit Skill
-            editSkill.Clear();
+
+            editSkill.SendKeys(Keys.Control + "A");
+            editSkill.SendKeys(Keys.Backspace);
             editSkill.SendKeys(skill);
             editSkillLevel.Click();
             SelectElement editSkillLevelDropdown = new SelectElement(editSkillLevel);

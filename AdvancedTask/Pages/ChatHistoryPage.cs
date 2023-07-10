@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedTask.Pages
 {
-    internal class ChatPage
+    internal class ChatHistoryPage
     {
     }
 }

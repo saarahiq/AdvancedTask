@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace AdvancedTask.Pages
 {
-    public class ShareSkillPage
+    public class EditShareSkillPage
     {
         readonly IWebDriver driver;
-        public ShareSkillPage(IWebDriver driver)
+        public EditShareSkillPage(IWebDriver driver)
         {
             this.driver = driver;
         }
@@ -88,10 +88,14 @@ namespace AdvancedTask.Pages
         }
         public void editShareSkill(string title, string description, string category, string subCategory, List<string> tagsToRemove, List<string> tagsToAdd, string serviceType, string locationType, AvailableDaysModel availableDays, string skillTrade, string credit, List<String> skillExchangeTagsToRemove, List<String> skillExchangeTagsToAdd, string workSampleFilename, string active)
         {
-            Title.Clear();
+
+            Title.SendKeys(Keys.Control + "A");
+            Title.SendKeys(Keys.Backspace);
             Title.SendKeys(title);
 
-            Description.Clear();
+
+            Description.SendKeys(Keys.Control + "A");
+            Description.SendKeys(Keys.Backspace);
             Description.SendKeys(description);
 
             if (category != "")
@@ -264,6 +268,17 @@ namespace AdvancedTask.Pages
             // Click on Save
             Save.Click();
             Thread.Sleep(500);
+        }
+
+        public void verifyPopUpMessage(string expectedPopUpMessage)
+        {
+            Assert.AreEqual(expectedPopUpMessage, PopUpMessage.Text, "Actual and expected popup message do not match.");
+        }
+
+        public void verifyInvalidTitle(string titleErrorMessage)
+        {
+            IWebElement titleError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[2]/div"));
+            Assert.AreEqual(titleErrorMessage, titleError.Text, "Actual and expected title error message do not match ");
         }
     }
 }

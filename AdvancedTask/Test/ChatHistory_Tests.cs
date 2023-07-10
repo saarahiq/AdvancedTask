@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedTask.Test
 {
-    internal class Chat_Tests
+    internal class ChatHistory_Tests
     {
     }
 }

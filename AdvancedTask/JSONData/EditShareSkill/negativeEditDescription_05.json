@@ -3,28 +3,31 @@
   "description": "",
   "category": "Business",
   "subCategory": "Legal Consulting",
-  "tags": [ "Document Writing", "Data Analysis" ],
-  "serviceType": "Hourly basis service",
+  "tagsToRemove": [],
+  "tagsToAdd": [ "HELLO123" ],
+  "serviceType": "One-off service",
   "locationType": "Online",
   "availableDays": {
-    "startDate": "07/04/2023",
-    "EndDate": "08/04/2023",
+    "startDate": "07/08/2024",
+    "EndDate": "08/04/2025",
     "days": {
       "Mon": {
-        "startTime": "09:00 AM",
-        "endTime": "10:00 PM"
+        "startTime": "0900AM",
+        "endTime": "1000PM"
       },
       "Tue": {
-        "startTime": "12:30 PM",
-        "endTime": "02:00 PM"
+        "startTime": "1230PM",
+        "endTime": "0200PM"
       },
       "Wed": {
-        "startTime": "08:15 AM",
-        "endTime": "11:00 AM"
+        "startTime": "0815AM",
+        "endTime": "1100AM"
       }
     }
   },
-  "skillTrade": "Skill-Exchange",
-  "skillExchange": "Data Analysis",
+  "skillTrade": "Skill-exchange",
+  "skillExchangeTagsToRemove": [],
+  "skillExchangeTagsToAdd": [ "Data Analysis" ],
+  "workSampleFilename": null,
   "active": "Active"
 }

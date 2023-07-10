@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoItX.Dotnet" Version="3.3.14.5" />
+    <PackageReference Include="DotNetSeleniumExtras.PageObjects" Version="3.11.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="ExtentReports" Version="2.41.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />

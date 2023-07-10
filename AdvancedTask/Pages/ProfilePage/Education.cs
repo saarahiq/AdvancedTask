@@ -82,6 +82,8 @@ namespace AdvancedTask.Pages.ProfilePage
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[6]/span[1]/i", 10);
             editButton.Click();
             // Enter University name
+            editUniversityTextbox.SendKeys(Keys.Control + "A");
+            editUniversityTextbox.SendKeys(Keys.Backspace);
             editUniversityTextbox.Clear();
             editUniversityTextbox.SendKeys(university);
             // Select country
@@ -93,6 +95,8 @@ namespace AdvancedTask.Pages.ProfilePage
             SelectElement titleSelectElement = new SelectElement(editTitleDropdown);
             titleSelectElement.SelectByText(title);
             // Enter degree
+            editDegreeTextbox.SendKeys(Keys.Control + "A");
+            editDegreeTextbox.SendKeys(Keys.Backspace);
             editDegreeTextbox.Clear();
             editDegreeTextbox.SendKeys(degree);
             // Select year

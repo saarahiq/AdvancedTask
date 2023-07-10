@@ -64,9 +64,11 @@ namespace AdvancedTask.Pages.ProfilePage
             //Click on edit 
             editButton.Click();
             //Edit Certification
-            editCertName.Clear();
+            editCertName.SendKeys(Keys.Control + "A");
+            editCertName.SendKeys(Keys.Backspace);
             editCertName.SendKeys(certificate);
-            editCertFrom.Clear();
+            editCertFrom.SendKeys(Keys.Control + "A");
+            editCertFrom.SendKeys(Keys.Backspace);
             editCertFrom.SendKeys(certifiedFrom);
             SelectElement editCertYearDropdown = new SelectElement(editCertYear);
             editCertYearDropdown.SelectByText(year);
