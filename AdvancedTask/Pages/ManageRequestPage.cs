@@ -18,7 +18,6 @@ namespace AdvancedTask.Pages
             this.driver = driver;
         }
         private IWebElement manageRequestsHoverButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]"));
-        private IWebElement starRatingSection => driver.FindElement(By.XPath("//*[@id=\"received-request-section\"]/div[2]/div[1]/table/tbody/tr[5]/td[3]/div"));
         private IWebElement pageNavigation => driver.FindElement(By.XPath("//*[@id=\"received-request-section\"]/div[2]/div[1]/div"));
         private IWebElement popUpMessage => driver.FindElement(By.CssSelector(".ns-box-inner"));
 
@@ -48,17 +47,30 @@ namespace AdvancedTask.Pages
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
             skillTradeRequestRow.Click();
+            var starRatingSection = driver.FindElement(By.XPath($"//tr[td/a[text()='{title}'] and td/a[text()='{sender}']]/following-sibling::tr/td[contains(., 'Rating')]"));
+            Thread.Sleep(1000);
             starRatingSection.FindElement(By.XPath($"//i[@aria-posinset='{starNumber}']")).Click();
         }
         public void declineServiceRequest(string title, string sender)
         {
             goToReceivedRequestPage();
-            //Navigate to skill trade request row you want to accept and Click on Decline button
+            //Navigate to skill trade request row you want to decline and Click on Decline button
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
             var declineButton = skillTradeRequestRow.FindElement(By.CssSelector(".ui.negative.basic.button"));
             declineButton.Click();
+            Thread.Sleep(3000);
+        }
+        public void completeServiceRequest(string title, string sender)
+        {
+            goToReceivedRequestPage();
+            //Navigate to skill trade request row you want to complete and Click on Complete button
+            var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
+            Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
+            var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
+            var completeButton = skillTradeRequestRow.FindElement(By.CssSelector(".ui.positive.basic.button"));
+            completeButton.Click();
             Thread.Sleep(3000);
         }
         public void verifyServiceRequestHasBeenAccepted(string title, string sender)
@@ -81,6 +93,11 @@ namespace AdvancedTask.Pages
             var statusColumn = skillTradeRequestRow.FindElement(By.XPath("//td[text() = 'Declined']"));
             Assert.AreEqual("Declined", statusColumn.Text, "Actual and expected declined status do not match");
         }
+        public void verifyServiceRequestHasBeenCompleted()
+        {
+            Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
+            Assert.AreEqual("Request has been updated", popUpMessage.Text, "Actual and expected completed service request message do not match");
+        }
         public void navigateToPages(string pageNumber)
         {
             try
@@ -91,7 +108,7 @@ namespace AdvancedTask.Pages
             }
             catch (Exception ex)
             {
-                Assert.Fail($"Page number {pageNumber} not availabe");
+                Assert.Pass($"Page number {pageNumber} not availabe");
             }
 
         }

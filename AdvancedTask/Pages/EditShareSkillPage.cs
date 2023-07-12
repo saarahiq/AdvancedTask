@@ -19,61 +19,24 @@ namespace AdvancedTask.Pages
         {
             this.driver = driver;
         }
-
-        //Click on Manage Listings Button
         private IWebElement ManageListings => driver.FindElement(By.LinkText("Manage Listings"));
         private IWebElement EditButton => driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i"));
-
-        //Enter the Title in textbox
         private IWebElement Title => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input"));
-
-        //Enter the Description in textbox
         private IWebElement Description => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea"));
-
-        //Click on Category Dropdown        
         private IWebElement CategoryDropDown => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select"));
-
-        //Click on SubCategory Dropdown        
         private IWebElement SubCategoryDropDown => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select"));
-
-        //Enter Tag names in textbox        
         private IWebElement Tags => driver.FindElement(By.ClassName("ReactTags__tagInputField"));
-
-        //Click on Start Date dropdown
         private IWebElement StartDateDropDown => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[1]/div[2]/input"));
-
-        //Click on End Date dropdown
         private IWebElement EndDateDropDown => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[7]/div[2]/div/div[1]/div[4]/input"));
-
-        //Enter Skill Exchange
         private IWebElement SkillExchange => driver.FindElement(By.XPath("//div[@class='form-wrapper']//input[@placeholder='Add new tag']"));
-
-        //Enter the amount for Credit
         private IWebElement CreditAmount => driver.FindElement(By.Name("charge"));
-
-
-        //Click on Save button
         private IWebElement Save => driver.FindElement(By.XPath("//input[@value='Save']"));
-
-        //PopUp Message
         private IWebElement PopUpMessage => driver.FindElement(By.XPath("/html/body/div[1]/div"));
-
-        //Title required Error Message
         private IWebElement TitleErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[2]/div"));
-
-        //Description required
         private IWebElement DescriptionErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[2]/div/div[2]/div[2]/div"));
-
-        //Category required Error Message
         private IWebElement CategoryErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div[2]"));
-
-        //SubCategory required Error Message
         private IWebElement SubCategoryErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[2]/div"));
-
-        //Tags required Error Message
         private IWebElement TagsErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div[2]"));
-
-        //Skill-Exchange Tags required Error Message
         private IWebElement SkillExchangeErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[8]/div[4]/div[2]"));
 
         public void goToManageListingsPage()
@@ -88,12 +51,9 @@ namespace AdvancedTask.Pages
         }
         public void editShareSkill(string title, string description, string category, string subCategory, List<string> tagsToRemove, List<string> tagsToAdd, string serviceType, string locationType, AvailableDaysModel availableDays, string skillTrade, string credit, List<String> skillExchangeTagsToRemove, List<String> skillExchangeTagsToAdd, string workSampleFilename, string active)
         {
-
             Title.SendKeys(Keys.Control + "A");
             Title.SendKeys(Keys.Backspace);
             Title.SendKeys(title);
-
-
             Description.SendKeys(Keys.Control + "A");
             Description.SendKeys(Keys.Backspace);
             Description.SendKeys(description);
@@ -104,26 +64,16 @@ namespace AdvancedTask.Pages
                 SelectElement select = new SelectElement(driver.FindElement(By.XPath("//select[@name ='categoryId']")));
                 select.SelectByText(category);
             }
-
             if (subCategory != "")
             {
                 SubCategoryDropDown.Click();
                 SelectElement selectSubCategory = new SelectElement(driver.FindElement(By.XPath("//select[@name ='subcategoryId']")));
                 selectSubCategory.SelectByText(subCategory);
             }
-
-
-            // If there are tags we want to remove for the "Tags" section then let's go ahead and remove them from the website.
-            // We want to first check if there are any tags in the "tagsToRemove" key in the JSON file by counting the number of items in that list. 
-            // If the list has a length of 1 or more, then we have Tags we want to remove.
             if (tagsToRemove.Count >= 1)
             {
-                // Now we want to go through each tag in the list of "tagsToRemove"
                 foreach (var tag in tagsToRemove)
                 {
-                    // We use try/catch here to handle the possibility that the Tag we want to remove may not exist which will result in an Exception when Selenium tries to find the tag.
-                    // In the case it can't find it, let's just fail the test because we are expecting there to be a tag so we can remove it.
-                    // So for each of those tags we want to remove in the list of "tagsToRemove" do the following: 
                     try
                     {
                         // Here, we try to find the tag we want to remove by the content of the tag using XPath.
@@ -138,10 +88,6 @@ namespace AdvancedTask.Pages
                     }
                 }
             }
-
-            // Now we want to check if there are tags we want to Add for the "Tags" section.
-            // We want to first check if there are any tags in the "tagsToAdd" key in the JSON file by counting the number of items in that list. 
-            // If the list has a length of 1 or more, then we have Tags we want to add.
             if (tagsToAdd.Count >= 1)
             {
                 // Now we want to go through each tag in the list of "tagsToAdd"
@@ -156,8 +102,6 @@ namespace AdvancedTask.Pages
                     Tags.SendKeys(Keys.Return);
                 }
             }
-
-
             IWebElement serviceTypeRadioButton = driver.FindElement(By.XPath($"//input[@name='serviceType' and following-sibling::label[text()='{serviceType}']]"));
             serviceTypeRadioButton.Click();
 
@@ -165,18 +109,16 @@ namespace AdvancedTask.Pages
             locationTypeRadioButton.Click();
 
             StartDateDropDown.Click();
+            StartDateDropDown.SendKeys(Keys.Delete + Keys.ArrowRight + Keys.Delete + Keys.ArrowRight + Keys.Delete + Keys.ArrowLeft + Keys.ArrowLeft + Keys.ArrowLeft);
             StartDateDropDown.SendKeys(availableDays.startDate);
 
             EndDateDropDown.Click();
+            EndDateDropDown.SendKeys(Keys.Delete + Keys.ArrowRight + Keys.Delete + Keys.ArrowRight + Keys.Delete + Keys.ArrowLeft + Keys.ArrowLeft + Keys.ArrowLeft);
             EndDateDropDown.SendKeys(availableDays.endDate);
-
 
             // We want to go through each Day and its times from the JSON file under the "availableDays" -> "days" key.
             foreach (var dayAndTimes in availableDays.days)
             {
-                // For every day e.g. Mon, Tue.. and it's start and end time, do the following:
-
-
                 // Store the day e.g. Mon, Tue, Wed into a variable.
                 var day = dayAndTimes.Key;
 
@@ -191,10 +133,6 @@ namespace AdvancedTask.Pages
 
                 // Here we store the 'checkbox' (for Mon, Tue etc) in a variable.
                 var dayCheckBox = availableDayRow.FindElement(By.Name("Available"));
-
-                // Because we stored the variable, we want to first check if it has already been checked.
-                // E.g. Because we're editing, there could be an instance where the day checkbox could have already been checked.
-                // In that case, we don't want to click it again because it will uncheck it.
 
                 // Here we're checking if it's NOT selected.
                 if (dayCheckBox.Selected != true)
@@ -232,7 +170,6 @@ namespace AdvancedTask.Pages
                         }
                     }
                 }
-
                 // After that, I have to add the skills I want to Exchange
                 if (skillExchangeTagsToAdd.Count >= 1)
                 {
@@ -249,7 +186,6 @@ namespace AdvancedTask.Pages
                 // I click on the Credit option so I have to add the Credit
                 CreditAmount.Click(); CreditAmount.SendKeys(credit);
             }
-
             // Upload Work 
             if (workSampleFilename != string.Empty)
             {
@@ -261,7 +197,6 @@ namespace AdvancedTask.Pages
                 //AutoItX.Send("{Enter}");
                 //Thread.Sleep(1000);
             }
-
             IWebElement activeRadioButton = driver.FindElement(By.XPath($"//input[@name='isActive' and following-sibling::label[text()='{active}']]"));
             activeRadioButton.Click();
 
@@ -269,7 +204,6 @@ namespace AdvancedTask.Pages
             Save.Click();
             Thread.Sleep(500);
         }
-
         public void verifyPopUpMessage(string expectedPopUpMessage)
         {
             Assert.AreEqual(expectedPopUpMessage, PopUpMessage.Text, "Actual and expected popup message do not match.");
@@ -279,6 +213,30 @@ namespace AdvancedTask.Pages
         {
             IWebElement titleError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[2]/div"));
             Assert.AreEqual(titleErrorMessage, titleError.Text, "Actual and expected title error message do not match ");
+        }
+
+        public void verifyInvalidTags(string tagsErrorMessage)
+        {
+            IWebElement tagsError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div[2]"));
+            Assert.AreEqual(tagsErrorMessage, tagsError.Text, "Actual and expected tags error message do not match");
+        }
+
+        public void verifyInvalidDescription(string descriptionErrorMessage)
+        {
+            IWebElement descriptionError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[2]/div/div[2]/div[2]/div"));
+            Assert.AreEqual(descriptionErrorMessage, descriptionError.Text, "Actual and expected description error message do not match");
+        }
+
+        public void verifyInvalidStartDateError(string startDateErrorMessage)
+        {
+            IWebElement startDateError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div[2]"));
+            Assert.AreEqual(startDateErrorMessage, startDateError.Text, "Actual and expected description error message do not match");
+        }
+
+        public void verifyInvalidEndDateError(string endDateErrorMessage)
+        {
+            IWebElement endDateError = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div[3]"));
+            Assert.AreEqual(endDateErrorMessage, endDateError.Text, "Actual and expected description error message do not match");
         }
     }
 }

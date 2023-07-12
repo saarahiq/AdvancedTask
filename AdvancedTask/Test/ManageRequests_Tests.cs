@@ -18,7 +18,7 @@ namespace AdvancedTask.Test
         {
             var skillTradeRequests = new List<List<string>> 
             {
-                new List<string> {"Data Analyst", "Mars"}
+                new List<string> { "Make up and Hair style", "Mars"}
             };
             return skillTradeRequests;
         }
@@ -26,7 +26,15 @@ namespace AdvancedTask.Test
         {
             var skillTradeRequests = new List<List<string>>
             {
-                new List<string> { "Senior Test Analyst", "Mars" }
+                new List<string> { "Swimming", "Mars" }
+            };
+            return skillTradeRequests;
+        }
+        public static List<List<string>> listOfCompletedRequests()
+        {
+            var skillTradeRequests = new List<List<string>>
+            {
+                new List<string> { "Data Analyst", "Mars" }
             };
             return skillTradeRequests;
         }
@@ -55,14 +63,21 @@ namespace AdvancedTask.Test
             manageRequestsPage.declineServiceRequest(skillTradeRequest[0], skillTradeRequest[1]);
             manageRequestsPage.verifyServiceRequestHasBeenDeclined(skillTradeRequest[0], skillTradeRequest[1]);
         }
-        [Test, Order(3), Description("Rate a Service"), TestCaseSource(nameof(listOfAcceptRequests))]
+        [Test, Order(3), Description("Complete a Service Request"), TestCaseSource(nameof(listOfCompletedRequests))]
+        public void manageRequestCompleteTest(List<string> skillTradeRequest)
+        {
+            ManageRequests manageRequestsPage = new ManageRequests(driver);
+            manageRequestsPage.completeServiceRequest(skillTradeRequest[0], skillTradeRequest[1]);
+            manageRequestsPage.verifyServiceRequestHasBeenCompleted();
+        }
+        [Test, Order(4), Description("Rate a Service"), TestCaseSource(nameof(listOfAcceptRequests))]
         public void starRateService(List<string> skillTradeRequest)
         {
             ManageRequests manageRequestsPage = new ManageRequests(driver);
-            manageRequestsPage.selectStarRating(skillTradeRequest[0], skillTradeRequest[1], "4");
+            manageRequestsPage.selectStarRating(skillTradeRequest[0], skillTradeRequest[1], "3");
 
         }
-       [Test, Order(4), Description("Navigate to Pages"), TestCaseSource(nameof(listOfPages))]
+       [Test, Order(5), Description("Navigate to Pages"), TestCaseSource(nameof(listOfPages))]
         public void pageNavigation(string pageNumber)
         {
             ManageRequests manageRequestsPage = new ManageRequests(driver);

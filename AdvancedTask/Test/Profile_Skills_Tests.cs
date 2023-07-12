@@ -134,7 +134,7 @@ namespace AdvancedTask.Test
 
             // Check if the Skill record has been deleted successfully
             string popUpMessage = skillsPage.getPopUpMessage();
-            Assert.AreEqual("Python has been deleted", popUpMessage, "Actual and expected certification record do not match.");
+            Assert.AreEqual("API has been deleted", popUpMessage, "Actual and expected certification record do not match.");
         }
 
     }

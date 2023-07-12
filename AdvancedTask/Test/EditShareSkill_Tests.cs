@@ -20,7 +20,7 @@ namespace AdvancedTask.Test
                 ShareSkillModel shareSkill = readShareSkill(file);
                 shareSkills.Add(shareSkill);
             };
-           return shareSkills;
+            return shareSkills;
         }
 
         public static List<ShareSkillModel> readPositiveEditShareSkillTests()
@@ -63,7 +63,74 @@ namespace AdvancedTask.Test
             };
             return readShareskillTest(testFiles);
         }
+        public static List<ShareSkillModel> readNegativeEmptyDescriptionTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditDescription_05.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+        public static List<ShareSkillModel> readNegativeDescriptionWithOnlySpaceTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditDescription_06.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+        public static List<ShareSkillModel> readNegativeDescriptionWithSpecialCharactersTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditDescription_07.json"
+            };
+            return readShareskillTest(testFiles);
+        }
 
+        public static List<ShareSkillModel> readNegativeDescriptionWithMoreThan600CharactersTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditDescription_08.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+
+        public static List<ShareSkillModel> readNegativeRemoveAllTagsTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditTags_09.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+        public static List<ShareSkillModel> readNegativeAvailableDaysStartDateEmptyTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditStartDate_10.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+
+        public static List<ShareSkillModel> readNegativeAvailableDaysStartDateInPastTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditStartDate_11.json"
+            };
+            return readShareskillTest(testFiles);
+        }
+
+        public static List<ShareSkillModel> readNegativeAvailableDaysStartDateGreaterThanEndDateTest()
+        {
+            var testFiles = new string[]
+            {
+                "negativeEditEndDate_12.json"
+            };
+            return readShareskillTest(testFiles);
+        }
         [Test, Order(1), Description("Edit a ShareSkill successfully"), TestCaseSource(nameof(readPositiveEditShareSkillTests))]
         public void positiveEditNewSkill(ShareSkillModel editShareSkill)
         {
@@ -110,7 +177,6 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.verifyInvalidTitle("Please type a Title.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
-
         }
 
         [Test, Order(3), Description("Edit the Title with Symbols"), TestCaseSource(nameof(readNegativeTitleWithSymbolsTest))]
@@ -185,7 +251,205 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
-            
+        }
+
+        [Test, Order(6), Description("Edit the Description with empty input"), TestCaseSource(nameof(readNegativeEmptyDescriptionTest))]
+        public void negativeEditEmptyDescription(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidDescription("Please type a description.");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(7), Description("Edit the Description with only a space input"), TestCaseSource(nameof(readNegativeDescriptionWithOnlySpaceTest))]
+        public void negativeEditDescriptionWithOnlySpace(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidDescription("First character must be an alphabet character or a number.");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(8), Description("Edit the Description with special characters"), TestCaseSource(nameof(readNegativeDescriptionWithSpecialCharactersTest))]
+        public void negativeEditDescriptionWithSpecialCharacters(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidDescription("Special characters are not allowed.");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(9), Description("Edit the Description with characters more than 600"), TestCaseSource(nameof(readNegativeDescriptionWithMoreThan600CharactersTest))]
+        public void negativeEditDescriptionWithMoreThan600Characters(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+        }
+
+        [Test, Order(10), Description("Remove all tags and save ShareSkill Listing"), TestCaseSource(nameof(readNegativeRemoveAllTagsTest))]
+        public void negativeEditRemoveAllTags(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidTags("Please enter a tag");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(11), Description("Edit the Start Date with an empty date"), TestCaseSource(nameof(readNegativeAvailableDaysStartDateEmptyTest))]
+        public void negativeEditAvailableDaysStartDateWithEmptyDate(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(12), Description("Edit the Start Date with a date in the past"), TestCaseSource(nameof(readNegativeAvailableDaysStartDateInPastTest))]
+        public void negativeEditAvailableDaysStartDateInThePast(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidStartDateError("Start Date cannot be set to a day in the past");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+        }
+
+        [Test, Order(13), Description("Edit the Start Date with a date greater than End Date"), TestCaseSource(nameof(readNegativeAvailableDaysStartDateGreaterThanEndDateTest))]
+        public void negativeEditAvailableDaysStartDateGreaterThanEndDate(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
+            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
     }
 }
+
