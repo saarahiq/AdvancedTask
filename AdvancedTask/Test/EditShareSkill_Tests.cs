@@ -152,6 +152,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
         }
         [Test, Order(2), Description("Edit the Title with empty input"), TestCaseSource(nameof(readNegativeEmptyTitleTest))]
         public void negativeEditEmptyTitle(ShareSkillModel editShareSkill)
@@ -175,6 +176,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("Please type a Title.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -200,6 +202,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("First character must be an alphabet character or a number.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
 
@@ -226,6 +229,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("Special characters are not allowed.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -251,6 +255,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
         }
 
         [Test, Order(6), Description("Edit the Description with empty input"), TestCaseSource(nameof(readNegativeEmptyDescriptionTest))]
@@ -274,6 +279,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("Please type a description.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -299,6 +305,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("First character must be an alphabet character or a number.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -324,6 +331,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("Special characters are not allowed.");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -349,6 +357,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
         }
 
         [Test, Order(10), Description("Remove all tags and save ShareSkill Listing"), TestCaseSource(nameof(readNegativeRemoveAllTagsTest))]
@@ -372,6 +381,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTags("Please enter a tag");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -397,6 +407,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -422,6 +433,7 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date cannot be set to a day in the past");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
@@ -447,9 +459,34 @@ namespace AdvancedTask.Test
                 editShareSkill.skillExchangeTagsToAdd,
                 editShareSkill.workSampleFilename,
                 editShareSkill.active);
+            shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
             shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
         }
+        [Test, Order(14), Description("Cancel updating of Shareskill Listing"), TestCaseSource(nameof(readPositiveEditShareSkillTests))]
+        public void cancelUpdatingOfShareskillListing(ShareSkillModel editShareSkill)
+        {
+            EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
+            shareSkillPage.goToManageListingsPage();
+            shareSkillPage.editShareSkill(
+                editShareSkill.title,
+                editShareSkill.description,
+                editShareSkill.category,
+                editShareSkill.subCategory,
+                editShareSkill.tagsToRemove,
+                editShareSkill.tagsToAdd,
+                editShareSkill.serviceType,
+                editShareSkill.locationType,
+                editShareSkill.availableDays,
+                editShareSkill.skillTrade,
+                editShareSkill.credit,
+                editShareSkill.skillExchangeTagsToRemove,
+                editShareSkill.skillExchangeTagsToAdd,
+                editShareSkill.workSampleFilename,
+                editShareSkill.active);
+            shareSkillPage.cancelEditShareSkill();
+        }
+        
     }
 }
 

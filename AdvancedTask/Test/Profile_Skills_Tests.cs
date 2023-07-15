@@ -4,6 +4,7 @@ using AdvancedTask.Utilities;
 using MongoDB.Driver;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using RazorEngine.Compilation.ImpromptuInterface.InvokeExt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,15 @@ namespace AdvancedTask.Test
             {
                 "positiveEditSkill.json"
             };
-            return readSkillsTest(testFile);    
+            return readSkillsTest(testFile);
+        }
+        private static List<SkillModel> readDeleteSkillTests()
+        {
+            var testFile = new string[]
+            {
+                "positiveEditSkill.json"
+            };
+            return readSkillsTest(testFile);
         }
         private static List<SkillModel> readNegativeAddSkillTests()
         {
@@ -73,7 +82,7 @@ namespace AdvancedTask.Test
         [Test, Order(1), Description("Add Skill successfully"), TestCaseSource(nameof(readPositiveAddSkillTests))]
         public void positiveAddNewSkill(SkillModel addSkill)
         {
-            Skills skillsPage = new Skills(driver);
+            Skills skillsPage = new Skills(driver, test);
             skillsPage.addNewSkill(addSkill.skill, addSkill.skillLevel);
 
             //Check if the New Skill records have been added successfully
@@ -86,7 +95,7 @@ namespace AdvancedTask.Test
         [Test, Order(2), Description("Edit an existing Skill record successfully"), TestCaseSource(nameof(readPositiveEditSkillTests))]
         public void positiveEditSkill(SkillModel editSkill)
         {
-            Skills skillsPage = new Skills(driver);
+            Skills skillsPage = new Skills(driver, test);
             skillsPage.editSkills(editSkill.skill, editSkill.skillLevel);
 
             //Check if the Skill record had been updated successfully
@@ -99,7 +108,7 @@ namespace AdvancedTask.Test
         [Test, Order(3), Description("Enter a Skill without Required Fields"), TestCaseSource(nameof(readNegativeAddSkillTests))]
         public void negativeAddNewSkill(SkillModel negativeSkill)
         {
-            Skills skillsPage = new Skills(driver);
+            Skills skillsPage = new Skills(driver, test);
             skillsPage.addNewSkill(negativeSkill.skill, negativeSkill.skillLevel);
 
             // Check if the New Certification record has been deleted
@@ -109,7 +118,7 @@ namespace AdvancedTask.Test
         [Test, Order(4), Description("Enter a Duplicate Skill"), TestCaseSource(nameof(readNegativeDuplicateSkillTest))]
         public void addDuplicateSkill(SkillModel duplicateSkill)
         {
-            Skills skillsPage = new Skills(driver);
+            Skills skillsPage = new Skills(driver, test);
             skillsPage.addNewSkill(duplicateSkill.skill, duplicateSkill.skillLevel);
 
             // Check if the New Skill record has not been added
@@ -119,22 +128,22 @@ namespace AdvancedTask.Test
         [Test, Order(5), Description("Edit a Skill without Required Fields"), TestCaseSource(nameof(readNegativeEditSkillTests))]
         public void negativeEditSkill(SkillModel negativeSkill)
         {
-            Skills skillsPage = new Skills(driver);
+            Skills skillsPage = new Skills(driver, test);
             skillsPage.editSkills(negativeSkill.skill, negativeSkill.skillLevel);
 
             //Check if the Skill record has not been edited
             string popUpMessage = skillsPage.getPopUpMessage();
             Assert.AreEqual("Please enter skill and experience level", popUpMessage, "Actual and expected skill record do not match.");
         }
-       [Test, Order(6), Description("Delete an existing Skill record successfully")]
-        public void deleteSkill()
+       [Test, Order(6), Description("Delete an existing Skill record successfully"), TestCaseSource(nameof(readDeleteSkillTests))]
+        public void deleteSkill(SkillModel deleteSkill)
         {
-            Skills skillsPage = new Skills(driver);
-            skillsPage.deleteSkill();
+            Skills skillsPage = new Skills(driver, test);
+            skillsPage.deleteSkill(deleteSkill.skill, deleteSkill.skillLevel);
 
             // Check if the Skill record has been deleted successfully
             string popUpMessage = skillsPage.getPopUpMessage();
-            Assert.AreEqual("API has been deleted", popUpMessage, "Actual and expected certification record do not match.");
+            Assert.AreEqual($"{deleteSkill.skill} has been deleted", popUpMessage, "Actual and expected certification record do not match.");
         }
 
     }

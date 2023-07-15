@@ -8,7 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoIt;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using MongoDB.Bson;
 
 namespace AdvancedTask.Pages
 {
@@ -38,7 +41,7 @@ namespace AdvancedTask.Pages
         private IWebElement SubCategoryErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[2]/div"));
         private IWebElement TagsErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div[2]"));
         private IWebElement SkillExchangeErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[8]/div[4]/div[2]"));
-
+        private IWebElement CancelButton => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[11]/div/input[2]"));
         public void goToManageListingsPage()
         {
             Wait.WaitToBeClickable(driver, "LinkText", "Manage Listings", 10);
@@ -189,21 +192,31 @@ namespace AdvancedTask.Pages
             // Upload Work 
             if (workSampleFilename != string.Empty)
             {
-                //IWebElement workSample = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[9]/div/div[2]/section/div/label/div/span/i"));
-                //workSample.Click();
-                //AutoItX.WinActivate("Open"); // Window name to select a file 
-                //Thread.Sleep(1000);
-                //AutoItX.Send(@"C:\Users\saara\OneDrive\Documents\Mars Competition Task-2\Test Upload File.txt"); // file path 
-                //AutoItX.Send("{Enter}");
-                //Thread.Sleep(1000);
+                IWebElement workSample = driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[9]/div/div[2]/section/div/label/div/span/i"));
+                workSample.Click();
+                AutoItX.WinActivate("Open"); // Window name to select a file 
+                Thread.Sleep(1000);
+                AutoItX.Send(@"C:\Users\saara\OneDrive\Documents\Mars Competition Task-2\Test Upload File.txt"); // file path 
+                AutoItX.Send("{Enter}");
+                Thread.Sleep(1000);
             }
             IWebElement activeRadioButton = driver.FindElement(By.XPath($"//input[@name='isActive' and following-sibling::label[text()='{active}']]"));
             activeRadioButton.Click();
 
-            // Click on Save
-            Save.Click();
             Thread.Sleep(500);
         }
+
+        public void saveEditShareSkill()
+        {
+            // Click on Save
+            Save.Click();
+        }
+
+        public void cancelEditShareSkill()
+        {
+            CancelButton.Click();
+        }
+
         public void verifyPopUpMessage(string expectedPopUpMessage)
         {
             Assert.AreEqual(expectedPopUpMessage, PopUpMessage.Text, "Actual and expected popup message do not match.");

@@ -1,5 +1,6 @@
 ﻿using AdvancedTask.Models;
 using AdvancedTask.Utilities;
+using AventStack.ExtentReports;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -15,9 +16,11 @@ namespace AdvancedTask.Pages.ProfilePage
     public class Skills
     {
         readonly IWebDriver driver;
-        public Skills(IWebDriver driver)
+        private ExtentTest test;
+        public Skills(IWebDriver driver, ExtentTest test)
         {
             this.driver = driver;
+            this.test = test;
         }
         private IWebElement skillsTab => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]"));
         private IWebElement addNewSkillsButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/thead/tr/th[3]/div"));
@@ -49,6 +52,8 @@ namespace AdvancedTask.Pages.ProfilePage
             skillLevelDropdown.SelectByText(skillLevel);
             addButton.Click();
             Thread.Sleep(2000);
+            // logging to extent reports
+            test.Log(Status.Pass, "Successfully created a new Skill record");
         }
         public void editSkills(string skill, string skillLevel)
         {
@@ -68,12 +73,13 @@ namespace AdvancedTask.Pages.ProfilePage
             updateButton.Click();
             Thread.Sleep(2000);
         }
-        public void deleteSkill()
+        public void deleteSkill(string skill, string skillLevel)
         {
             //Delete first Certification 
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 15);
             skillsTab.Click();
-            deleteButton.Click();
+            var findDeleteRow = driver.FindElement(By.XPath($"//tbody[tr[td[text()='{skill}'] and td[text()='{skillLevel}']]]//i[@class='remove icon']"));
+            findDeleteRow.Click();  
         }
         public string getPopUpMessage()
         {

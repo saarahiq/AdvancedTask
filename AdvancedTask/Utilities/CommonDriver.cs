@@ -1,5 +1,7 @@
 ﻿using AdvancedTask.Models;
 using AdvancedTask.Pages;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -19,30 +21,72 @@ namespace AdvancedTask.Utilities
         public IWebDriver driver;
         public User testUser;
         public MarsLoginPage marsLoginPage;
+        public static string ScreenshotPath = Properties.Resources.ScreenshotPath;
+        public static string ReportPath = Properties.Resources.ExtentReportPath;
+
+        #region reports
+        public static ExtentTest test;
+        public static ExtentReports extent;
+        #endregion
 
         //Page object initialization
         [SetUp]
         public void Setup()
         {
+            
+
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
             this.testUser = ReadTestUser("JSONData\\TestUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
+
+            #region Initialise Reports
+            // Initialise Test
+            var html = new ExtentHtmlReporter(ReportPath);
+            extent = new ExtentReports();
+            extent.AttachReporter(html);
+            test = extent.CreateTest("AdvancedTask");
+            #endregion
+
             //Launch Mars portal
             driver.Navigate().GoToUrl("http://localhost:5000");
             marsLoginPage.Login(this.testUser);
-         
+            
         }
+        public static string SaveScreenshot(IWebDriver driver, string ScreenShotFileName) // Definition
+        {
+            var folderLocation = (ScreenshotPath);
 
+            if (!Directory.Exists(folderLocation))
+            {
+                Directory.CreateDirectory(folderLocation);
+            }
+
+            var screenShot = ((ITakesScreenshot)driver).GetScreenshot();
+            var fileName = new StringBuilder(folderLocation);
+
+            fileName.Append(ScreenShotFileName);
+            fileName.Append(DateTime.Now.ToString("_dd-mm-yyyy_mss"));
+            //fileName.Append(DateTime.Now.ToString("dd-mm-yyyym_ss"));
+            fileName.Append(".png");
+            screenShot.SaveAsFile(fileName.ToString(), ScreenshotImageFormat.Png);
+            return fileName.ToString();
+        }
         [TearDown]
         public void TearDown()
         {
+            // Screenshot
+            String img = SaveScreenshot(driver, "Report");
+
+            // end test. (Reports)
+
+            // calling Flush writes everything to the log file (Reports)
+            extent.Flush();
             driver.Close();
             driver.Quit();
 
         }
-
         public static User ReadTestUser(string path)
         {
             var json = File.ReadAllText(path);
