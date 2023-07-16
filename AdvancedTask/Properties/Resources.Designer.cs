@@ -61,7 +61,7 @@ namespace AdvancedTask.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Utilities\XMLFile.xml.
+        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\ExtentReports\.
         /// </summary>
         internal static string ConfigPath {
             get {

@@ -30,6 +30,15 @@ namespace AdvancedTask.Utilities
         #endregion
 
         //Page object initialization
+        [OneTimeSetUp]
+        public void Initialize()
+        {
+            // Initialise Test
+            var html = new ExtentHtmlReporter(ReportPath);
+            extent = new ExtentReports();
+            extent.AttachReporter(html);
+            test = extent.CreateTest("AdvancedTask");
+        }
         [SetUp]
         public void Setup()
         {
@@ -41,19 +50,12 @@ namespace AdvancedTask.Utilities
             //Open chrome browser
             driver.Manage().Window.Maximize();
 
-            #region Initialise Reports
-            // Initialise Test
-            var html = new ExtentHtmlReporter(ReportPath);
-            extent = new ExtentReports();
-            extent.AttachReporter(html);
-            test = extent.CreateTest("AdvancedTask");
-            #endregion
-
             //Launch Mars portal
             driver.Navigate().GoToUrl("http://localhost:5000");
             marsLoginPage.Login(this.testUser);
             
         }
+
         public static string SaveScreenshot(IWebDriver driver, string ScreenShotFileName) // Definition
         {
             var folderLocation = (ScreenshotPath);
@@ -82,10 +84,15 @@ namespace AdvancedTask.Utilities
             // end test. (Reports)
 
             // calling Flush writes everything to the log file (Reports)
-            extent.Flush();
+            
             driver.Close();
             driver.Quit();
 
+        }
+        [OneTimeTearDown]
+        public void OneTimeTeardown()
+        {
+            extent.Flush();
         }
         public static User ReadTestUser(string path)
         {

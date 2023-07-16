@@ -42,6 +42,7 @@ namespace AdvancedTask.Pages
         {
             Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
             Assert.AreEqual("Notification updated", popUpMessage.Text, "Actual and expected delete notification message do not match");
+
         }
     }
 }
