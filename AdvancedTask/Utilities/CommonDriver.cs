@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdvancedTask.Pages.ProfilePage;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace AdvancedTask.Utilities
 {
@@ -23,6 +24,10 @@ namespace AdvancedTask.Utilities
         public UserObject testUser;
         public MarsLoginPage marsLoginPage;
         public Language languagePage;
+        public ShareSkillPage shareSkillPage;
+        public ManageRequestPage manageRequestPage;
+        public NotificationsPage notificationsPage;
+        public ChatPage ChatPage;
         private bool login;
         public CommonDriver() : this(true) { }
         public CommonDriver(bool login) { this.login = login; }
@@ -36,6 +41,10 @@ namespace AdvancedTask.Utilities
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
             this.languagePage = new Language(driver);
+            this.shareSkillPage = new ShareSkillPage(driver);
+            this.manageRequestPage = new ManageRequestPage(driver);
+            this.notificationsPage = new NotificationsPage(driver);
+            this.ChatPage = new ChatPage(driver);
             this.testUser = ReadTestUser("JSONData\\testUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
@@ -57,6 +66,11 @@ namespace AdvancedTask.Utilities
         {
             var json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<LanguageObject>(json);
+        }
+        public static ShareSkillObject ReadTestShareSkill(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<ShareSkillObject>(json);
         }
 
         [TearDown]

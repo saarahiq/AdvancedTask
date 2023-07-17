@@ -1,4 +1,5 @@
 ﻿using AdvancedTask.JSON_Objects;
+using AdvancedTask.Pages.ProfilePage;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
 using System;
@@ -19,7 +20,6 @@ namespace AdvancedTask.Test
             foreach (var file in jsonFiles)
             {
                 LanguageObject language = ReadTestLanguage("JSONData\\Language\\" + file);
-                
                 languages.Add(language);
             }
             return languages;
@@ -28,6 +28,7 @@ namespace AdvancedTask.Test
         {
             return ReadLanguageTests(new string[] { 
                 "positiveAddNewlanguage_01.json" ,
+
                 "positiveAddNewlanguage_02.json"
             });
         }
@@ -100,7 +101,7 @@ namespace AdvancedTask.Test
             Assert.AreEqual("Please enter language and level", checkPopUpMessage,  "Actual and expected skill record do not match.");
         }
 
-        [Test, Order(5), Description("Check if user is not able to add new language"), TestCaseSource(nameof(ReadNegativeAddRepeatTests))]
+        [Test, Order(5), Description("Check if user is not able to add repeat language"), TestCaseSource(nameof(ReadNegativeAddRepeatTests))]
         public void TestAddRepeatLanguageFailed(LanguageObject language)
         {
             languagePage.AddNewLanguage(language);
