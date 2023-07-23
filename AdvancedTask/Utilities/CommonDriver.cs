@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdvancedTask.Pages.ProfilePage;
+using Gherkin.CucumberMessages.Types;
 
 namespace AdvancedTask.Utilities
 {
@@ -23,6 +24,11 @@ namespace AdvancedTask.Utilities
         public UserObject testUser;
         public MarsLoginPage marsLoginPage;
         public Language languagePage;
+        public Description descriptionPage;
+        public ManageListingsPage manageListingsPage;
+        public ChatPage chatPage;
+        public SearchSkillPage searchSkillPage;
+        public NotificationsPage notificationsPage;
         private bool login;
         public CommonDriver() : this(true) { }
         public CommonDriver(bool login) { this.login = login; }
@@ -35,8 +41,13 @@ namespace AdvancedTask.Utilities
         {
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
-            this.languagePage = new Language(driver);
+            this.descriptionPage = new Description(driver);
+            this.manageListingsPage = new ManageListingsPage(driver);
+            this.chatPage = new ChatPage(driver);
+            this.searchSkillPage = new SearchSkillPage(driver);
+            //this.notificationsPage = new NotificationsPage(driver);
             this.testUser = ReadTestUser("JSONData\\testUser.json");
+           
             //Open chrome browser
             driver.Manage().Window.Maximize();
             //Launch Mars portal
@@ -57,6 +68,23 @@ namespace AdvancedTask.Utilities
         {
             var json = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<LanguageObject>(json);
+        }
+
+        public static DescriptionObject ReadTestDescription(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<DescriptionObject>(json);
+        }
+        public static SearchskillObject ReadTestSearchskill(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<SearchskillObject>(json);
+        }
+
+        public static ChatObject ReadTestChat(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<ChatObject>(json);
         }
 
         [TearDown]
