@@ -114,11 +114,8 @@ namespace AdvancedTask.Test
             }
             if (!testSuccess)
                 Assert.Fail("The number of notifications hasn't decreased after 10 seconds.");
-        }
-
-       
-
-            
-        
+        }       
     }
 }
+
+

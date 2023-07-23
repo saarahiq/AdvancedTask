@@ -54,12 +54,9 @@ namespace AdvancedTask.Pages
         }
         private void SetAvailableDay(int id, string startTime, string endTime)
         {
-            IWebElement selectDay = driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[1]/div/input"));
-            selectDay.Click();
-            IWebElement startTimeInput = driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[2]/input"));
-            startTimeInput.SendKeys(startTime);
-            IWebElement endTimeInput = driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[3]/input"));
-            endTimeInput.SendKeys(endTime);
+            selectDay(id).Click();
+            startTimeInput(id).SendKeys(startTime);
+            endTimeInput(id).SendKeys(endTime);
         }
         private void SetSkillTradeType(string skillTradeType, string[] skillExchange, string skillCredit)
         {
@@ -95,9 +92,9 @@ namespace AdvancedTask.Pages
         public string CreateShareSkill(ShareSkillObject skill)
         {
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[2]/a", 10);
-            
             shareSkillButton.Click();
             Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"requiredField\"]", 10);
+           
             //Add new title
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input", 10);
             titleTextbox.SendKeys(skill.Title);
@@ -185,13 +182,14 @@ namespace AdvancedTask.Pages
             return errorPopUpMessage.Text;
         }
 
+        private IWebElement selectDay(int id) => driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[1]/div/input"));
+        private IWebElement startTimeInput(int id) => driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[2]/input"));
+        private IWebElement endTimeInput(int id) => driver.FindElement(By.XPath($"//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[{id}]/div[3]/input"));
         private IWebElement shareSkillButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/div[2]/a"));
         private IWebElement titleTextbox => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input"));
         private IWebElement descriptionTextbox => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea"));
         private IWebElement categoryDropdown => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div/select"));
-
         private ICollection<IWebElement> categoryOptions => driver.FindElements(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div/select/option"));
-
         private IWebElement subcategoryDropdown => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select"));
         private ICollection<IWebElement> subcategoryOptions => driver.FindElements(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select/option"));
         private IWebElement tagsTextbox => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div/div/div/div/input"));
