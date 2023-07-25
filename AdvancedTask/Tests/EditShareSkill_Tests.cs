@@ -1,4 +1,5 @@
 ﻿using AdvancedTask.Models;
+using AdvancedTask.PageObjectComponents;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
@@ -132,11 +133,16 @@ namespace AdvancedTask.Test
             };
             return readShareskillTest(testFiles);
         }
+        [SetUp]
+        public void editShareSkillSetUp()
+        {
+            NavigationMenu navigationMenu = new NavigationMenu(driver);
+            navigationMenu.goToManageListingsButton();
+        }
         [Test, Order(1), Description("Edit a ShareSkill successfully"), TestCaseSource(nameof(readPositiveEditShareSkillTests))]
         public void positiveEditNewSkill(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -161,7 +167,6 @@ namespace AdvancedTask.Test
         public void negativeEditEmptyTitle(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             Thread.Sleep(2000);
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
@@ -181,7 +186,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("Please type a Title.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Title field cannot be empty");
         }
@@ -190,7 +197,6 @@ namespace AdvancedTask.Test
         public void negativeEditTitleWithSymbols(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -209,7 +215,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("First character must be an alphabet character or a number.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Title field cannot have symbols");
         }
@@ -218,7 +226,6 @@ namespace AdvancedTask.Test
         public void negativeEditTitleWithSpecialCharacters(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -237,7 +244,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTitle("Special characters are not allowed.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Title field cannot have special characters");
         }
@@ -246,7 +255,6 @@ namespace AdvancedTask.Test
         public void negativeEditTitleWithMoreThan100Characters(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -272,7 +280,6 @@ namespace AdvancedTask.Test
         public void negativeEditEmptyDescription(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -291,7 +298,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("Please type a description.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Description field cannot be empty");
         }
@@ -300,7 +309,6 @@ namespace AdvancedTask.Test
         public void negativeEditDescriptionWithOnlySpace(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -319,7 +327,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("First character must be an alphabet character or a number.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Description field cannot start with invalid character");
         }
@@ -328,7 +338,6 @@ namespace AdvancedTask.Test
         public void negativeEditDescriptionWithSpecialCharacters(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -347,7 +356,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidDescription("Special characters are not allowed.");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Title field cannot have special characters");
         }
@@ -356,7 +367,6 @@ namespace AdvancedTask.Test
         public void negativeEditDescriptionWithMoreThan600Characters(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -382,7 +392,6 @@ namespace AdvancedTask.Test
         public void negativeEditRemoveAllTags(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -401,7 +410,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidTags("Please enter a tag");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Tags field cannot be empty");
         }
@@ -410,7 +421,6 @@ namespace AdvancedTask.Test
         public void negativeEditAvailableDaysStartDateWithEmptyDate(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -429,16 +439,17 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
-            test.Log(Status.Pass, "Successfully verified //logging to extent reports\r\n            test.Log(Status.Pass, \"Successfully verified Title field cannot have symbols\"); be empty");
+            test.Log(Status.Pass, "Successfully verified Title field cannot have symbols");
         }
 
         [Test, Order(12), Description("Edit the Start Date with a date in the past"), TestCaseSource(nameof(readNegativeAvailableDaysStartDateInPastTest))]
         public void negativeEditAvailableDaysStartDateInThePast(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -457,7 +468,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date cannot be set to a day in the past");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Start date field cannot have a past date");
         }
@@ -466,7 +479,6 @@ namespace AdvancedTask.Test
         public void negativeEditAvailableDaysStartDateGreaterThanEndDate(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,
@@ -485,7 +497,9 @@ namespace AdvancedTask.Test
                 editShareSkill.active);
             shareSkillPage.saveEditShareSkill();
             shareSkillPage.verifyInvalidStartDateError("Start Date shouldn't be greater than End Date");
-            shareSkillPage.verifyPopUpMessage("Please complete the form correctly.");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Please complete the form correctly.", popUpMessage, "Actual and expected popup message do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified Start date field cannot be greater than the End date");
         }
@@ -493,7 +507,6 @@ namespace AdvancedTask.Test
         public void cancelUpdatingOfShareskillListing(ShareSkillModel editShareSkill)
         {
             EditShareSkillPage shareSkillPage = new EditShareSkillPage(driver);
-            shareSkillPage.goToManageListingsPage();
             shareSkillPage.editShareSkill(
                 editShareSkill.title,
                 editShareSkill.description,

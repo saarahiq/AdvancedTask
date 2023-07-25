@@ -1,5 +1,7 @@
 ﻿using AdvancedTask.Models;
-using AdvancedTask.Pages.ProfilePage;
+using AdvancedTask.PageObjectComponents;
+using AdvancedTask.Pages;
+using AdvancedTask.Pages.ProfilePageTabs;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
 using NUnit.Framework;
@@ -72,6 +74,12 @@ namespace AdvancedTask.Test
             };
             return readEducationTest(testFiles);
         }
+        [SetUp]
+        public void educationTestsSetUp()
+        {
+            ProfilePage profilePage = new ProfilePage(driver);
+            profilePage.goToEducationTab();
+        }
         [Test, Order(1), Description("Add Education Successfully"), TestCaseSource(nameof(readPositiveEducationAddTests))]
         public void positiveAddNewEducation(EducationModel addEducation)
         {
@@ -79,7 +87,8 @@ namespace AdvancedTask.Test
             educationPage.addNewEducation(addEducation.universityName, addEducation.country, addEducation.title, addEducation.degree, addEducation.yearOfGraduation);
 
             //Check if the New Education records have been added successfully
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             string[] newEducationAdded = educationPage.getLatestEducation();
             Assert.AreEqual(popUpMessage, "Education has been added", "Could not verify that the Education was added.");
             Assert.AreEqual(addEducation.universityName, newEducationAdded[0], "Actual and expected Education university name does not match");
@@ -98,7 +107,8 @@ namespace AdvancedTask.Test
             educationPage.editEducation(editEducation.universityName, editEducation.country, editEducation.title, editEducation.degree, editEducation.yearOfGraduation);
 
             //Check if the New Education records have been added successfully
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             string[] updatedEducation = educationPage.getFirstEducation();
             Assert.AreEqual(popUpMessage, "Education as been updated", "Could not verify that the Education was added.");
             Assert.AreEqual(editEducation.universityName, updatedEducation[0], "Actual and expected Education university name does not match");
@@ -116,7 +126,8 @@ namespace AdvancedTask.Test
             Education educationPage = new Education(driver);
             educationPage.addNewEducation(negativeEducation.universityName, negativeEducation.country, negativeEducation.title, negativeEducation.degree, negativeEducation.yearOfGraduation);
 
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Please enter all the fields", popUpMessage, "Actual and expected education do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified an Education record cannot be created without entering the reqiured fields");
@@ -129,7 +140,8 @@ namespace AdvancedTask.Test
             educationPage.addNewEducation(duplicateEducation.universityName, duplicateEducation.country, duplicateEducation.title, duplicateEducation.degree, duplicateEducation.yearOfGraduation);
 
             // Check if the New Education record has not been added
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("This information is already exist.", popUpMessage, "Actual and expected education record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified a duplicate Education record cannot be created");
@@ -142,7 +154,8 @@ namespace AdvancedTask.Test
             educationPage.editEducation(negativeEducation.universityName, negativeEducation.country, negativeEducation.title, negativeEducation.degree, negativeEducation.yearOfGraduation);
 
             // Check if the New Education record has not been added
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Please enter all the fields", popUpMessage, "Actual and expected education record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified an Education record cannot be updated without entering the reqiured fields");
@@ -155,7 +168,8 @@ namespace AdvancedTask.Test
             educationPage.deleteEducation();
 
             // Check if the Education record has been deleted successfully
-            string popUpMessage = educationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Education entry successfully removed", popUpMessage, "Actual and expected education record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified deleting an Education record");

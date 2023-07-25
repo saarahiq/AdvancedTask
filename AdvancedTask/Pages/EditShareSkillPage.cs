@@ -22,7 +22,6 @@ namespace AdvancedTask.Pages
         {
             this.driver = driver;
         }
-        private IWebElement ManageListings => driver.FindElement(By.LinkText("Manage Listings"));
         private IWebElement EditButton => driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i"));
         private IWebElement Title => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input"));
         private IWebElement Description => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea"));
@@ -34,19 +33,9 @@ namespace AdvancedTask.Pages
         private IWebElement SkillExchange => driver.FindElement(By.XPath("//div[@class='form-wrapper']//input[@placeholder='Add new tag']"));
         private IWebElement CreditAmount => driver.FindElement(By.Name("charge"));
         private IWebElement Save => driver.FindElement(By.XPath("//input[@value='Save']"));
-        private IWebElement PopUpMessage => driver.FindElement(By.XPath("/html/body/div[1]/div"));
-        private IWebElement TitleErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[1]/div/div[2]/div/div[2]/div"));
-        private IWebElement DescriptionErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[2]/div/div[2]/div[2]/div"));
-        private IWebElement CategoryErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div[2]"));
-        private IWebElement SubCategoryErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[2]/div"));
-        private IWebElement TagsErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div[2]"));
-        private IWebElement SkillExchangeErrorMessage => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[8]/div[4]/div[2]"));
         private IWebElement CancelButton => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[11]/div/input[2]"));
         public void goToManageListingsPage()
         {
-            Wait.WaitToBeClickable(driver, "LinkText", "Manage Listings", 10);
-            ManageListings.Click();
-
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i", 10);
             EditButton.Click();
 
@@ -215,11 +204,6 @@ namespace AdvancedTask.Pages
         public void cancelEditShareSkill()
         {
             CancelButton.Click();
-        }
-
-        public void verifyPopUpMessage(string expectedPopUpMessage)
-        {
-            Assert.AreEqual(expectedPopUpMessage, PopUpMessage.Text, "Actual and expected popup message do not match.");
         }
 
         public void verifyInvalidTitle(string titleErrorMessage)

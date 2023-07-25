@@ -1,5 +1,7 @@
 ﻿using AdvancedTask.Models;
-using AdvancedTask.Pages.ProfilePage;
+using AdvancedTask.PageObjectComponents;
+using AdvancedTask.Pages;
+using AdvancedTask.Pages.ProfilePageTabs;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
@@ -36,7 +38,7 @@ namespace AdvancedTask.Test
         {
             var testFiles = new string[] {
                 "positiveAddNewCert_01.json" ,
-                "positiveAddNewCert_02.json" 
+                "positiveAddNewCert_02.json"
             };
             return readCertificationTest(testFiles);
         }
@@ -73,6 +75,12 @@ namespace AdvancedTask.Test
             return readCertificationTest(testFiles);
         }
 
+        [SetUp]
+        public void certificationTestsSetUp()
+        {
+            ProfilePage profilePage = new ProfilePage(driver);
+            profilePage.goToCertificationTab();
+        }
         [Test, Order(1), Description("Add Certification successfully"), TestCaseSource(nameof(readPositiveCertAddTests))]
         public void positiveAddNewCertification(CertificationModel addCertification)
         {
@@ -80,7 +88,8 @@ namespace AdvancedTask.Test
             certificationPage.addNewCertification(addCertification.certificate, addCertification.certifiedFrom, addCertification.year);
 
             //Check if the New Certification records have been added successfully
-            string popUpMessage = certificationPage.getPopUpMessage();
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             string[] newCertificationAdded = certificationPage.getLatestCertification();
             Assert.AreEqual(popUpMessage, newCertificationAdded[0] + " has been added to your certification", "Actual and expected certification record do not match.");
             Assert.AreEqual(addCertification.certificate, newCertificationAdded[0], "Actual and expected certification name do not match.");
@@ -98,7 +107,9 @@ namespace AdvancedTask.Test
             certificationPage.editCertification(editCertification.certificate, editCertification.certifiedFrom, editCertification.year);
 
             // Check if the Certification record has been updated successfully
-            string popUpMessage = certificationPage.getPopUpMessage();
+            //Check if the New Certification records have been added successfully
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             string[] updatedCertificationAdded = certificationPage.getFirstCertification();
             Assert.AreEqual(popUpMessage, updatedCertificationAdded[0] + " has been updated to your certification", "Actual and expected certification record do not match.");
             Assert.AreEqual(editCertification.certificate, updatedCertificationAdded[0], "Actual and expected certification name do not match.");
@@ -115,7 +126,9 @@ namespace AdvancedTask.Test
             certificationPage.addNewCertification(negativeCertification.certificate, negativeCertification.certifiedFrom, negativeCertification.year);
 
             // Check if the New Certification record has been deleted
-            string popUpMessage = certificationPage.getPopUpMessage();
+            //Check if the New Certification records have been added successfully
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Please enter Certification Name, Certification From and Certification Year", popUpMessage, "Actual and expected certification record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified a Certification record cannot be created without entering the reqiured fields");
@@ -128,7 +141,9 @@ namespace AdvancedTask.Test
             certificationPage.addNewCertification(duplicateCertification.certificate, duplicateCertification.certifiedFrom, duplicateCertification.year);
 
             // Check if the New Certification record has not been added
-            string popUpMessage = certificationPage.getPopUpMessage();
+            //Check if the New Certification records have been added successfully
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("This information is already exist.", popUpMessage, "Actual and expected certification record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified a duplicate Certification record cannot be created");
@@ -141,7 +156,9 @@ namespace AdvancedTask.Test
             certificationPage.editCertification(negativeCertification.certificate, negativeCertification.certifiedFrom, negativeCertification.year);
 
             //Check if the New Certification record has not been edited
-            string popUpMessage = certificationPage.getPopUpMessage();
+            //Check if the New Certification records have been added successfully
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Please enter Certification Name, Certification From and Certification Year", popUpMessage, "Actual and expected certification record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified a Certification record cannot be updated without entering the reqiured fields");
@@ -154,7 +171,9 @@ namespace AdvancedTask.Test
             certificationPage.deleteCertification();
 
             // Check if the New Certification record has been deleted successfully
-            string popUpMessage = certificationPage.getPopUpMessage();
+            //Check if the New Certification records have been added successfully
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
             Assert.AreEqual("Applied Science has been deleted from your certification", popUpMessage, "Actual and expected certification record do not match.");
             //logging to extent reports
             test.Log(Status.Pass, "Successfully verified deleting a Certification record");

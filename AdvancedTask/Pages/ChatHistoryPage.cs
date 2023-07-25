@@ -18,14 +18,10 @@ namespace AdvancedTask.Pages
             this.driver = driver;
 
         }
-        private IWebElement chatButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]"));
         private IWebElement searchBar => driver.FindElement(By.XPath("//*[@id=\"chatRoomContainer\"]/div/div[1]/div/div[1]/input"));
-        private IWebElement openChatHistory => driver.FindElement(By.XPath("//*[@id=\"chatList\"]/div[1]/div[2]")); //*[@id="chatList"]/div //*[@id="chatList"]/div[1]
         private IWebElement listOfChats => driver.FindElement(By.XPath("//*[@id=\"chatList\"]"));
         public void searchChatHistory(string name)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
-            chatButton.Click();
             Thread.Sleep(2000);
             searchBar.SendKeys(name);
         }

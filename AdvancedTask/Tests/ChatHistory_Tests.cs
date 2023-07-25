@@ -1,6 +1,5 @@
 ﻿using AdvancedTask.Models;
 using AdvancedTask.Pages;
-using AdvancedTask.Pages.ProfilePage;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
 using AventStack.ExtentReports;
@@ -29,6 +28,12 @@ namespace AdvancedTask.Test
                 new List<string> { "saarah", "0"},
             };
             return chatHistoryNames;
+        }
+        [SetUp]
+        public void notificationsTestsSetUp()
+        {
+            NavigationMenu navigationMenu = new NavigationMenu(driver);
+            navigationMenu.goToChatPage();
         }
 
         [Test, Order(1), Description("Search Chat History"), TestCaseSource(nameof(listofChats))]

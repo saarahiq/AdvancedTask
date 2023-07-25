@@ -8,7 +8,7 @@ using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace AdvancedTask.Pages.ProfilePage
+namespace AdvancedTask.Pages.ProfilePageTabs
 {
     public class Education
     {
@@ -24,7 +24,6 @@ namespace AdvancedTask.Pages.ProfilePage
         private IWebElement titleDropdown => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[1]/select"));
         private IWebElement degreeTextbox => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[2]/input"));
         private IWebElement yearDropdown => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[3]/select"));
-        private IWebElement educationTab => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]"));
         private IWebElement saveButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[3]/div/input[1]"));
         private IWebElement editButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[6]/span[1]/i"));
         private IWebElement editUniversityTextbox => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody/tr/td/div[1]/div[1]/input"));
@@ -44,13 +43,9 @@ namespace AdvancedTask.Pages.ProfilePage
         private IWebElement getFirstEducationDegree => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[4]"));
         private IWebElement getFirstEducationYear => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[5]"));
         private IWebElement deleteButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[6]/span[2]/i"));
-        private IWebElement popUpMessage => driver.FindElement(By.CssSelector(".ns-box-inner"));
-
+        
         public void addNewEducation(string university, string country, string title, string degree, string year)
         {
-            //Click on Skills Tab
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 15);
-            educationTab.Click();
             //Click on Add New Button
             addNewButton.Click();
             // Enter University name
@@ -75,9 +70,6 @@ namespace AdvancedTask.Pages.ProfilePage
         }
         public void editEducation(string university, string country, string title, string degree, string year)
         {
-            //Click on Skills Tab
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 15);
-            educationTab.Click();
             //Click on Edit Button
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[1]/tr/td[6]/span[1]/i", 10);
             editButton.Click();
@@ -111,8 +103,6 @@ namespace AdvancedTask.Pages.ProfilePage
         public void deleteEducation()
         {
             //Delete first Education 
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[2]", 15);
-            educationTab.Click();
             deleteButton.Click();
         }
 
@@ -123,12 +113,6 @@ namespace AdvancedTask.Pages.ProfilePage
         public string[] getLatestEducation()
         {
             return new[] { getLatestEducationUniversity.Text, getLatestEducationCountry.Text, getLatestEducationTitle.Text, getLatestEducationDegree.Text, getLatestEducationYear.Text };
-        }
-
-        public string getPopUpMessage()
-        {
-            Wait.WaitToBeClickable(driver, "CssSelector", ".ns-box-inner", 15);
-            return popUpMessage.Text;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AdvancedTask.Utilities;
+﻿using AdvancedTask.PageObjectComponents;
+using AdvancedTask.Utilities;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -13,26 +14,19 @@ namespace AdvancedTask.Pages
     public class ManageRequests
     {
         readonly IWebDriver driver;
+        NavigationMenu navigationMenu;
         public ManageRequests(IWebDriver driver)
         {
+            //Instantiate the navigation menu
+            navigationMenu = new NavigationMenu(driver);
             this.driver = driver;
         }
-        private IWebElement manageRequestsHoverButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]"));
+        
         private IWebElement pageNavigation => driver.FindElement(By.XPath("//*[@id=\"received-request-section\"]/div[2]/div[1]/div"));
-        private IWebElement popUpMessage => driver.FindElement(By.CssSelector(".ns-box-inner"));
-
-        public void goToReceivedRequestPage()
-        {
-            //Navigate to Received Requests page
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]", 15);
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(manageRequestsHoverButton).Perform();
-            manageRequestsHoverButton.FindElement(By.LinkText("Received Requests")).Click();
-        }
         public void acceptServiceRequest(string title, string sender)
         {
-            goToReceivedRequestPage();
-            //Navigate to skill trade request row you want to accept and Click on Accept button
+            navigationMenu.goToManageRequestsReceivedRequestPage();
+           //Navigate to skill trade request row you want to accept and Click on Accept button
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender +"')]]]";
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
@@ -42,7 +36,7 @@ namespace AdvancedTask.Pages
         }
         public void selectStarRating(string title, string sender, string starNumber)
         {
-            goToReceivedRequestPage();
+            navigationMenu.goToManageRequestsReceivedRequestPage();
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
@@ -53,7 +47,7 @@ namespace AdvancedTask.Pages
         }
         public void declineServiceRequest(string title, string sender)
         {
-            goToReceivedRequestPage();
+            navigationMenu.goToManageRequestsReceivedRequestPage();
             //Navigate to skill trade request row you want to decline and Click on Decline button
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
@@ -64,7 +58,7 @@ namespace AdvancedTask.Pages
         }
         public void completeServiceRequest(string title, string sender)
         {
-            goToReceivedRequestPage();
+            navigationMenu.goToManageRequestsReceivedRequestPage();
             //Navigate to skill trade request row you want to complete and Click on Complete button
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             Wait.WaitToBeClickable(driver, "XPath", xPathToFindRow, 15);
@@ -75,8 +69,9 @@ namespace AdvancedTask.Pages
         }
         public void verifyServiceRequestHasBeenAccepted(string title, string sender)
         {
-            Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
-            Assert.AreEqual("Service has been updated", popUpMessage.Text, "Actual and expected accepted service request message do not match");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Service has been updated", popUpMessage, "Actual and expected accepted service request message do not match");
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
             Thread.Sleep(2000);
@@ -85,8 +80,9 @@ namespace AdvancedTask.Pages
         }
         public void verifyServiceRequestHasBeenDeclined(string title, string sender)
         {
-            Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
-            Assert.AreEqual("Service has been updated", popUpMessage.Text, "Actual and expected declined service request message do not match");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Service has been updated", popUpMessage, "Actual and expected declined service request message do not match");
             var xPathToFindRow = "//tr[td[a[contains(text(), '" + title + "')]] and td[a[contains(text(), '" + sender + "')]]]";
             var skillTradeRequestRow = driver.FindElement(By.XPath(xPathToFindRow));
             Thread.Sleep(2000);
@@ -95,14 +91,16 @@ namespace AdvancedTask.Pages
         }
         public void verifyServiceRequestHasBeenCompleted()
         {
-            Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 10);
-            Assert.AreEqual("Request has been updated", popUpMessage.Text, "Actual and expected completed service request message do not match");
+            PopUpComponent popUpComponent = new PopUpComponent(driver);
+            string popUpMessage = popUpComponent.getMessage();
+            Assert.AreEqual("Request has been updated", popUpMessage, "Actual and expected completed service request message do not match");
         }
         public void navigateToPages(string pageNumber)
         {
             try
             {
-                goToReceivedRequestPage();
+                navigationMenu.goToManageRequestsReceivedRequestPage();
+
                 Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"received-request-section\"]/div[2]/div[1]/div", 10);
                 pageNavigation.FindElement(By.XPath($"//button[text()='{pageNumber}']")).Click();
             }
