@@ -16,7 +16,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdvancedTask.Pages.ProfilePage;
+using AdvancedTask.Pages.ProfilePageTabs;
+using AdvancedTask.Models;
+using RazorEngine;
+using Language = AdvancedTask.Pages.ProfilePageTabs.Language;
 
 namespace AdvancedTask.Utilities
 {
@@ -24,6 +27,7 @@ namespace AdvancedTask.Utilities
     {
         public IWebDriver driver;
         public UserObject testUser;
+        public Language languagePage;
         public MarsLoginPage marsLoginPage;
         public static string ScreenshotPath = Properties.Resources.ScreenshotPath;
         public static string ReportPath = Properties.Resources.ExtentReportPath;
@@ -50,6 +54,7 @@ namespace AdvancedTask.Utilities
 
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
+            this.languagePage = new Language(driver);
             this.testUser = ReadTestUser("JSONData\\TestUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
@@ -98,7 +103,7 @@ namespace AdvancedTask.Utilities
         {
             extent.Flush();
         }
-        public static User ReadTestUser(string path)
+        public string Capture(String screenShotName)
         {
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             Screenshot screenshot = ts.GetScreenshot();
@@ -106,6 +111,16 @@ namespace AdvancedTask.Utilities
             screenshot.SaveAsFile(localPath, ScreenshotImageFormat.Png);
             string relPath = Path.GetRelativePath(TestReport.GetReportPath(), localPath);
             return relPath;
+        }
+        public static UserObject ReadTestUser(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<UserObject>(json);
+        }
+        public static LanguageObject ReadTestLanguage(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<LanguageObject>(json);
         }
         public static CertificationModel readCertification(string jsonCertFile)
         {

@@ -15,9 +15,6 @@ namespace AdvancedTask.Test
     [Parallelizable]
     public class Registration_Tests : CommonDriver
     {
-
-        public Registration_Tests() : base(false) { }
-
         public static ICollection<UserObject> ReadRegistrationTests(string[] jsonFiles, bool randomEmail = false)
         {
             var users = new List<UserObject>();
