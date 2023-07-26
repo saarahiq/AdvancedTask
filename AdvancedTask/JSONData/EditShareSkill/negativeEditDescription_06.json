@@ -1,0 +1,33 @@
+﻿{
+  "title": "Business Analyst",
+  "description": " ",
+  "category": "Business",
+  "subCategory": "Legal Consulting",
+  "tagsToRemove": [],
+  "tagsToAdd": [ "HELLO123" ],
+  "serviceType": "One-off service",
+  "locationType": "Online",
+  "availableDays": {
+    "startDate": "07/08/2024",
+    "EndDate": "08/04/2025",
+    "days": {
+      "Mon": {
+        "startTime": "0900AM",
+        "endTime": "1000PM"
+      },
+      "Tue": {
+        "startTime": "1230PM",
+        "endTime": "0200PM"
+      },
+      "Wed": {
+        "startTime": "0815AM",
+        "endTime": "1100AM"
+      }
+    }
+  },
+  "skillTrade": "Skill-exchange",
+  "skillExchangeTagsToRemove": [],
+  "skillExchangeTagsToAdd": [ "Data Analysis" ],
+  "workSampleFilename": null,
+  "active": "Active"
+}
