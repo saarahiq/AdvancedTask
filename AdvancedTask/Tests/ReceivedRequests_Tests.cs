@@ -13,7 +13,7 @@ namespace AdvancedTask.Test
 {
     [TestFixture]
     [Parallelizable]
-    public class ManageRequests_Tests : CommonDriver
+    public class ReceivedRequests_Tests : CommonDriver
     {
         public static List<List<string>> listOfAcceptRequests()
         {
