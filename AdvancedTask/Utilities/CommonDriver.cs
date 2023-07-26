@@ -1,4 +1,4 @@
-﻿using AdvancedTask.Models;
+﻿using AdvancedTask.JSON_Objects;
 using AdvancedTask.Pages;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
@@ -7,19 +7,23 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using RazorEngine.Compilation.ImpromptuInterface.Dynamic;
+using AventStack.ExtentReports;
+using AdvancedTask.Report;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdvancedTask.Pages.ProfilePage;
 
 namespace AdvancedTask.Utilities
 {
     public class CommonDriver
     {
         public IWebDriver driver;
-        public User testUser;
+        public UserObject testUser;
         public MarsLoginPage marsLoginPage;
         public static string ScreenshotPath = Properties.Resources.ScreenshotPath;
         public static string ReportPath = Properties.Resources.ExtentReportPath;
@@ -96,8 +100,12 @@ namespace AdvancedTask.Utilities
         }
         public static User ReadTestUser(string path)
         {
-            var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<User>(json);
+            ITakesScreenshot ts = (ITakesScreenshot)driver;
+            Screenshot screenshot = ts.GetScreenshot();
+            var localPath = Path.Combine(TestReport.GetScreenShotPath(), screenShotName);
+            screenshot.SaveAsFile(localPath, ScreenshotImageFormat.Png);
+            string relPath = Path.GetRelativePath(TestReport.GetReportPath(), localPath);
+            return relPath;
         }
         public static CertificationModel readCertification(string jsonCertFile)
         {
