@@ -1,0 +1,32 @@
+﻿{
+  "title": "Business Analyst",
+  "description": "Provide Data driven solutions",
+  "category": "Business",
+  "subCategory": "Legal Consulting",
+  "tagsToRemove": [ "Document Writing", "Data Analysis" ],
+  "tagsToAdd": [],
+  "serviceType": "Hourly basis service",
+  "locationType": "Online",
+  "availableDays": {
+    "startDate": "07/04/2023",
+    "EndDate": "08/04/2023",
+    "days": {
+      "Mon": {
+        "startTime": "09:00 AM",
+        "endTime": "10:00 PM"
+      },
+      "Tue": {
+        "startTime": "12:30 PM",
+        "endTime": "02:00 PM"
+      },
+      "Wed": {
+        "startTime": "08:15 AM",
+        "endTime": "11:00 AM"
+      }
+    }
+  },
+  "skillTrade": "Skill-exchange",
+  "skillExchangeTagsToRemove": [],
+  "skillExchangeTagsToAdd": [ "Data Analysis" ],
+  "active": "Active"
+}

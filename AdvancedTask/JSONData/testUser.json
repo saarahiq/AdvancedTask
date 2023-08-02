@@ -1,8 +1,0 @@
-{
-  "FirstName": "Mars",
-  "LastName": "Advanced",
-  "Email": "mars.advanced@example.com",
-  "Password": "123456",
-  "ConfirmationPassword": "123456",
-  "AgreeToTC": true
-}
