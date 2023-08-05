@@ -1,4 +1,5 @@
 ﻿using AdvancedTask.JSON_Objects;
+using AdvancedTask.PageObjectComponent;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using MongoDB.Bson;
@@ -26,6 +27,8 @@ namespace AdvancedTask.Test
             }
             return chats;
         }
+        
+        
         public static ICollection<ChatObject> ReadPositiveChatTests()
         {
             return ReadChatTests(new string[]
@@ -40,6 +43,13 @@ namespace AdvancedTask.Test
             {
                 "NegativeChat.json"
             });
+        }
+
+        [SetUp]
+        public void NavigationtoChatPage()
+        {
+            MenuNavigation menuNavigation = new MenuNavigation(driver);
+            menuNavigation.GoToChatPage();
         }
 
         [Test, Order(1), Description("Check if user is able to chat with first user"), TestCaseSource(nameof(ReadPositiveChatTests))]

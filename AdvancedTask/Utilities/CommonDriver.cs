@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AdvancedTask.Pages.ProfilePage;
 using Gherkin.CucumberMessages.Types;
+using AdvancedTask.PageObjectComponent;
 
 namespace AdvancedTask.Utilities
 {
@@ -29,6 +30,7 @@ namespace AdvancedTask.Utilities
         public ChatPage chatPage;
         public SearchSkillPage searchSkillPage;
         public NotificationsPage notificationsPage;
+        public MenuNavigation menuNavigation;
         private bool login;
         public CommonDriver() : this(true) { }
         public CommonDriver(bool login) { this.login = login; }
@@ -45,6 +47,7 @@ namespace AdvancedTask.Utilities
             this.manageListingsPage = new ManageListingsPage(driver);
             this.chatPage = new ChatPage(driver);
             this.searchSkillPage = new SearchSkillPage(driver);
+            this.menuNavigation = new MenuNavigation(driver);
             //this.notificationsPage = new NotificationsPage(driver);
             this.testUser = ReadTestUser("JSONData\\testUser.json");
            

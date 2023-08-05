@@ -22,8 +22,8 @@ namespace AdvancedTask.Pages
         private IWebElement firstListing => driver.FindElement(By.XPath("//*[@id=\"listing-management-section\"]/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[3]"));
         public void DeleteFirstlisting()
         {
-            Thread.Sleep(5000);
-            manageListingtab.Click();
+            //Thread.Sleep(5000);
+            //manageListingtab.Click();
             //Identify delete button and click
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"listing-management-section\"]/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[8]/div/button[3]/i", 10);
             deleteButton.Click();
@@ -32,8 +32,8 @@ namespace AdvancedTask.Pages
 
         public void DeletelistingCancel()
         {
-            Thread.Sleep(5000);
-            manageListingtab.Click();
+            //Thread.Sleep(5000);
+            //manageListingtab.Click();
             //Identify delete button and click
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"listing-management-section\"]/div[2]/div[1]/div[1]/table/tbody/tr[1]/td[8]/div/button[3]/i", 10);
             deleteButton.Click();

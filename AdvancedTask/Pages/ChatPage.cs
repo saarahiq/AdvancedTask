@@ -19,26 +19,27 @@ namespace AdvancedTask.Pages
 
         private IWebElement chatButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]"));
         private IWebElement searchTextBox => driver.FindElement(By.XPath("//*[@id=\"chatRoomContainer\"]/div/div[1]/div/div[1]/input"));
-        private IWebElement searchedUser => driver.FindElement(By.XPath("//*[@id=\"chatList\"]/div/div[2]"));
+        private IWebElement searchedUser => driver.FindElement(By.XPath("//*[@id=\"chatList\"]/div/div[2]/div[1]"));
         private IWebElement chatBox => driver.FindElement(By.XPath("//*[@id=\"chatTextBox\"]"));
         private IWebElement sendButton => driver.FindElement(By.XPath("//*[@id=\"btnSend\"]"));
         private IWebElement matchUser => driver.FindElement(By.XPath("//*[@id=\"chatList\"]/div/div[2]/div[1]"));
         
         public void Chatwithfirstuser(ChatObject chat)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
-            chatButton.Click();
+           // Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
+           // chatButton.Click();
             chatBox.SendKeys(chat.ChatTextBox);
             sendButton.Click();
         }
 
         public void ChatwithSearchedUser(ChatObject chat)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
-            chatButton.Click();
+           // Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
+           // chatButton.Click();
             searchTextBox.Click();
             Thread.Sleep(2000);
             searchTextBox.SendKeys(chat.SearchUser);
+            Thread.Sleep(2000);
             searchedUser.Click();
             chatBox.SendKeys(chat.ChatTextBox);
             sendButton.Click();
@@ -47,8 +48,8 @@ namespace AdvancedTask.Pages
 
         public void SearchUserLowerCase(ChatObject chat)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
-            chatButton.Click();
+            //Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]", 10);
+           // chatButton.Click();
             searchTextBox.Click();
             Thread.Sleep(2000);
             searchTextBox.SendKeys(chat.SearchUser);

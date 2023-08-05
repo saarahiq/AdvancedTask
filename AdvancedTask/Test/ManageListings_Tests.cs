@@ -1,4 +1,5 @@
 ﻿using AdvancedTask.JSON_Objects;
+using AdvancedTask.PageObjectComponent;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
@@ -15,6 +16,13 @@ namespace AdvancedTask.Test
     [Parallelizable]
     public class ManageListings_Tests : CommonDriver
     {
+        [SetUp]
+        public void NavigationtoManageListingsPage()
+        {
+            MenuNavigation menuNavigation = new MenuNavigation(driver);
+            menuNavigation.GoToManageListingsPage();
+        }
+
         [Test, Order(1), Description("Check if user is able to not delete the first listing by clicking NO on PopUp box")]
         public void TestDeleteListingnotSuccessfull()
         {

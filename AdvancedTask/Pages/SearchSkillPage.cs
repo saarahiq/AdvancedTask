@@ -46,8 +46,8 @@ namespace AdvancedTask.Pages
         private IWebElement subcategoryCheck => driver.FindElement(By.XPath("//*[@id=\"service-detail-section\"]/div[2]/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[2]"));
         public void Searchskill(SearchskillObject searchskill)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
-            searchButton.Click();
+            //Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
+            //searchButton.Click();
             Thread.Sleep(5000);
             searchSkill.Click();
             searchSkill.SendKeys(searchskill.SearchskillTextBox);
@@ -59,11 +59,12 @@ namespace AdvancedTask.Pages
         }
         public void SearchskillByUser(SearchskillObject searchskill)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
-            searchButton.Click();
-            Thread.Sleep(1000);
+            //Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
+            //searchButton.Click();
+            //Thread.Sleep(1000);
             searchUser.Click();
             searchUser.SendKeys(searchskill.SearchuserTextBox);
+            Thread.Sleep(1000);
             selectUser.Click();
             onsiteButton.Click() ;
             
@@ -71,8 +72,8 @@ namespace AdvancedTask.Pages
 
         public void SearchByCategory(SearchskillObject searchskill)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
-            searchButton.Click();
+            //Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i", 10);
+            //searchButton.Click();
             Thread.Sleep(5000);
             graphicDesignLink.Click();
             bookAlbumLink.Click();

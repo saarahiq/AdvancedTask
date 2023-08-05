@@ -1,4 +1,5 @@
 ﻿using AdvancedTask.JSON_Objects;
+using AdvancedTask.PageObjectComponent;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
@@ -36,7 +37,12 @@ namespace AdvancedTask.Test
                 "Searchskill.json"
             });
         }
-
+        [SetUp]
+        public void NavigationtoSearchPage()
+        {
+            MenuNavigation menuNavigation = new MenuNavigation(driver);
+            menuNavigation.GoToSearchPage();
+        }
 
         [Test, Order(1), Description("Check if user is able to search skill"), TestCaseSource(nameof(ReadPositiveSearchskillTests))]
         public void TestSearchskillSuccessfully(SearchskillObject searchskill)
