@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
 using DnsClient.Protocol;

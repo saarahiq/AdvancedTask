@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V109.Tracing;

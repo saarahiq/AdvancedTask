@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using System;
@@ -89,7 +89,7 @@ namespace AdvancedTask.Pages
             else
                 hiddenRadio.Click();
         }
-        public string CreateShareSkill(ShareSkillObject skill)
+        public string CreateShareSkill(AddShareSkillModel skill)
         {
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[2]/a", 10);
             shareSkillButton.Click();

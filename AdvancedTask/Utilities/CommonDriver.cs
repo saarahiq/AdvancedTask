@@ -1,5 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
-using AdvancedTask.Pages;
+﻿using AdvancedTask.Pages;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using Newtonsoft.Json;
@@ -26,7 +25,7 @@ namespace AdvancedTask.Utilities
     public class CommonDriver
     {
         public IWebDriver driver;
-        public UserObject testUser;
+        public UserModel testUser;
         public Language languagePage;
         public ShareSkillPage shareSkillPage;
         public ManageRequestPage manageRequestPage;
@@ -107,9 +106,7 @@ namespace AdvancedTask.Utilities
             // end test. (Reports)
 
             // calling Flush writes everything to the log file (Reports)
-            
-            //driver.Close();
-           // driver.Quit();
+            driver.Quit();
 
         }
         [OneTimeTearDown]
@@ -126,21 +123,21 @@ namespace AdvancedTask.Utilities
             string relPath = Path.GetRelativePath(TestReport.GetReportPath(), localPath);
             return relPath;
         }
-        public static UserObject ReadTestUser(string path)
+        public static UserModel ReadTestUser(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<UserObject>(json);
+            return JsonConvert.DeserializeObject<UserModel>(json);
         }
-        public static LanguageObject ReadTestLanguage(string path)
+        public static LanguageModel ReadTestLanguage(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<LanguageObject>(json);
+            return JsonConvert.DeserializeObject<LanguageModel>(json);
         }
 
-        public static ShareSkillObject ReadTestShareSkill(string path)
+        public static AddShareSkillModel ReadTestShareSkill(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<ShareSkillObject>(json);
+            return JsonConvert.DeserializeObject<AddShareSkillModel>(json);
         }
 
         public static CertificationModel readCertification(string jsonCertFile)

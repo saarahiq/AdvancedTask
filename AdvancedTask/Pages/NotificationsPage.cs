@@ -140,6 +140,7 @@ namespace AdvancedTask.Pages
         public void LoadMoreNotifications()
         {
             //Identify load more button and click
+            Thread.Sleep(5000);
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[6]/div/center/a", 10);
             loadMoreButton.Click();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.JSON_Objects
+namespace AdvancedTask.Models
 {
     public class AvailableDay
     {
@@ -18,7 +18,7 @@ namespace AdvancedTask.JSON_Objects
         public string StartTime { get; set; }
         public string EndTime { get; set; }
     }
-    public class ShareSkillObject
+    public class AddShareSkillModel
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -36,6 +36,6 @@ namespace AdvancedTask.JSON_Objects
         public string Active { get; set; }
         public AvailableDay[] AvailableDays { get; set; }
     }
-   
+
 }
 

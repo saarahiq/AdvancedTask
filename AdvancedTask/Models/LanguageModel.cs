@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.JSON_Objects
+namespace AdvancedTask.Models
 {
-    public class LanguageObject
+    public class LanguageModel
     {
         public string LanguageTextbox { get; set; }
         public string LanguageLevel { get; set; }

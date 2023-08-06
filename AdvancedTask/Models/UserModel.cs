@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTask.JSON_Objects
+namespace AdvancedTask.Models
 {
-    public class UserObject
+    public class UserModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

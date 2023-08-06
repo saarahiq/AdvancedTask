@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
@@ -15,17 +15,17 @@ namespace AdvancedTask.Test
     [Parallelizable]
     public class ShareSkill_Tests:CommonDriver
     {
-        public static ICollection<ShareSkillObject> ReadShareSkillTests(string[] jsonFiles)
+        public static ICollection<AddShareSkillModel> ReadShareSkillTests(string[] jsonFiles)
           {
-            var newSkills = new List<ShareSkillObject>();
+            var newSkills = new List<AddShareSkillModel>();
             foreach (var file in jsonFiles)
             {
-                ShareSkillObject skill = ReadTestShareSkill("JSONData\\ShareSkill\\" + file);
+                AddShareSkillModel skill = ReadTestShareSkill("JSONData\\ShareSkill\\" + file);
             newSkills.Add(skill);
             }
             return newSkills;
           } 
-        public static ICollection<ShareSkillObject> ReadPositiveAddTests()
+        public static ICollection<AddShareSkillModel> ReadPositiveAddTests()
         {
             return ReadShareSkillTests(new string[]
             {
@@ -33,7 +33,7 @@ namespace AdvancedTask.Test
                 "positiveShareSkill_02.json"
             });
         }
-        public static ICollection<ShareSkillObject> ReadNeagtiveAddTests()
+        public static ICollection<AddShareSkillModel> ReadNeagtiveAddTests()
         {
             return ReadShareSkillTests(new string[]
             {
@@ -46,7 +46,7 @@ namespace AdvancedTask.Test
             });
         }
         [Test, Order(1), Description("Check if user is able to add new share skill successfully"),TestCaseSource(nameof(ReadPositiveAddTests))]
-        public void TestAddNewShareSkillSuccessfully(ShareSkillObject skill)
+        public void TestAddNewShareSkillSuccessfully(AddShareSkillModel skill)
         {
             shareSkillPage.CreateShareSkill(skill);
             //Check if the new share skill has been added
@@ -57,7 +57,7 @@ namespace AdvancedTask.Test
             test.Log(Status.Info, "Added skill category: " + addedShareSkill[1]);
         }
         [Test, Order(2), Description("Check if user is not able to add new share skill"), TestCaseSource(nameof(ReadNeagtiveAddTests))]
-        public void TestNegativeAddNewShareSkill(ShareSkillObject skill)
+        public void TestNegativeAddNewShareSkill(AddShareSkillModel skill)
         {
             shareSkillPage.CreateShareSkill(skill);
             //Check if the new share skill has been added failed
