@@ -78,12 +78,11 @@ namespace AdvancedTask.Pages.ProfilePageTabs
             //Edit language name
             editLanguageName.Click();
             editLanguageName.Clear();
-
             editLanguageName.SendKeys(language.LanguageTextbox);
-
             //Edit language level
             EditLanguageLevel(language.LanguageLevel);
             //Identify update buttonand click
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10);
             updateButton.Click();
         }
         public string[] GetFirstLanguage()

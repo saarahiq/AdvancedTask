@@ -1,6 +1,5 @@
 ﻿using AdvancedTask.JSON_Objects;
 using AdvancedTask.Pages;
-using AdvancedTask.Pages.ProfilePage;
 using AdvancedTask.Utilities;
 using AventStack.ExtentReports;
 using NUnit.Framework;

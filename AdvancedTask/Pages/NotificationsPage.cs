@@ -28,18 +28,26 @@ namespace AdvancedTask.Pages
             //Click on Delete button
             deleteNotificationButton.Click();
         }
-        
+        private IWebElement notification => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div"));
+        private IWebElement seeAllButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a"));
+        private IWebElement theFirstNotificationCheckbox => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[3]/input"));
+        private IWebElement unselectButton => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[2]"));
+        private IWebElement markFirstAsRead => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[4]"));
+        private IWebElement deleteSelection => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[3]"));
+        private IWebElement selectAllButton => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[1]"));
+        private IWebElement unselectAllButton => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[2]"));
+        private IWebElement markAsRead => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[4]"));
+        private IWebElement popUpMessage => driver.FindElement(By.CssSelector(".ns-box-inner"));
+        private IWebElement loadMoreButton => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[6]/div/center/a"));                                                                  
+        private IWebElement showLessButton => driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[11]/div[1]/center/a"));
+
         public void GoToNotificationsPage()
         {
             //Creating object of an actions class
             Actions action = new Actions(driver);
             //Performing the mouse  hover action on the target element
-            IWebElement notification = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div"));
             action.MoveToElement(notification).Perform();
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a", 10);
-            IWebElement seeAllButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a"));
-           
-           
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a", 10);
             seeAllButton.Click();
             Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[2]/div[1]/a/span/h4", 10);
         }
@@ -47,9 +55,7 @@ namespace AdvancedTask.Pages
         public void UnSelectOneNotification()
         {
             //Identify the first notification and select
-            IWebElement firstNotificationCheckbox = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[3]/input"));
-            firstNotificationCheckbox.Click();
-            IWebElement unselectButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[2]"));
+            theFirstNotificationCheckbox.Click();
             unselectButton.Click();
         }
 
@@ -68,24 +74,19 @@ namespace AdvancedTask.Pages
         public void MarkOneSelectionAsRead()
         {
             //Identify the first notification and select
-            IWebElement firstNotificationCheckbox = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[3]/input"));
-            firstNotificationCheckbox.Click();
-            IWebElement markFirstAsRead = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[4]"));
+            theFirstNotificationCheckbox.Click();
             markFirstAsRead.Click();
         }
         public void DeleteOneSelection()
         {
             //Identify the first notification and select
-            IWebElement firstNotificationCheckbox = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[3]/input"));
-            firstNotificationCheckbox.Click();
-            IWebElement deleteSelection = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[3]"));
+            theFirstNotificationCheckbox.Click();
             deleteSelection.Click();
         }
 
         public void SelectAllNotifications()
         {
             //Identify select all button and click
-            IWebElement selectAllButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[1]"));
             selectAllButton.Click();           
         }
 
@@ -105,10 +106,8 @@ namespace AdvancedTask.Pages
         public void UnSelectAllNotifications()
         {
             //Identify select all button and click
-            IWebElement selectAllButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[1]"));
             selectAllButton.Click();
             //Identify unselect all button and click
-            IWebElement unselectAllButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[2]"));
             unselectAllButton.Click();
         }
 
@@ -127,31 +126,27 @@ namespace AdvancedTask.Pages
         public void MarkAllSelectionsAsRead()
         {
             //Identify select all button and click
-            IWebElement selectAllButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[1]"));
             selectAllButton.Click();
             //Identify the mark as read button and click
-            IWebElement markAsRead = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[1]/div[4]"));
             markAsRead.Click();
         }
        
         public string GetPopUpMessage()
         {
             Wait.WaitToBeVisible(driver, "CssSelector", ".ns-box-inner", 15);
-            IWebElement popUpMessage = driver.FindElement(By.CssSelector(".ns-box-inner"));
             return popUpMessage.Text;
         }
 
         public void LoadMoreNotifications()
         {
             //Identify load more button and click
-            IWebElement loadMoreButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[6]/div/center/a"));
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[6]/div/center/a", 10);
             loadMoreButton.Click();
         }
 
         public void ShowLessNotifications()
         {
             //Identify show less button and click
-            IWebElement showLessButton = driver.FindElement(By.XPath("//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[11]/div[1]/center/a"));
             showLessButton.Click();
         }
         public  ICollection<IWebElement> GetAllNotificationMessages()

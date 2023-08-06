@@ -11,7 +11,7 @@ namespace AdvancedTask.Test
 {
     [TestFixture]
     [Parallelizable]
-    public class Notifications_Tests : CommonDriver
+    public class NotificationsSelections_Tests : CommonDriver
     {
         [Test, Order(1), Description("Check if user is able to unselect one notification"),]
         public void TestUnselectNotification()

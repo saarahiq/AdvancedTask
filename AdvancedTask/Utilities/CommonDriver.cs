@@ -30,8 +30,7 @@ namespace AdvancedTask.Utilities
         public Language languagePage;
         public ShareSkillPage shareSkillPage;
         public ManageRequestPage manageRequestPage;
-        public NotificationsPage notificationsPage;
-        public ChatPage ChatPage;
+        public Notifications notificationsPage;
         public MarsLoginPage marsLoginPage;
 
         public static string ScreenshotPath = Properties.Resources.ScreenshotPath;
@@ -66,15 +65,17 @@ namespace AdvancedTask.Utilities
             this.languagePage = new Language(driver);
             this.shareSkillPage = new ShareSkillPage(driver);
             this.manageRequestPage = new ManageRequestPage(driver);
-            this.notificationsPage = new NotificationsPage(driver);
-            this.ChatPage = new ChatPage(driver);
+            this.notificationsPage = new Notifications(driver);
             this.testUser = ReadTestUser("JSONData\\TestUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
 
             //Launch Mars portal
             driver.Navigate().GoToUrl("http://localhost:5000");
-            marsLoginPage.Login(this.testUser);
+            if (login)
+            {
+                marsLoginPage.Login(this.testUser);
+            }
             
         }
 
@@ -107,8 +108,8 @@ namespace AdvancedTask.Utilities
 
             // calling Flush writes everything to the log file (Reports)
             
-            driver.Close();
-            driver.Quit();
+            //driver.Close();
+           // driver.Quit();
 
         }
         [OneTimeTearDown]

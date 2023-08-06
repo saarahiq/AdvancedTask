@@ -116,7 +116,11 @@ namespace AdvancedTask.Test
                 return 1;
             else if (status == "Declined")
                 return 2;
-            return -1;
+            else if (status == "Withdrawn")
+                return 3;
+            else if (status == "Completed")
+                return 4;
+                return -1;
         }
 
         [Test, Order(5), Description("Check if user is able to sort by status"),]
