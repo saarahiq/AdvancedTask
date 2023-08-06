@@ -1,0 +1,52 @@
+{
+  "Title": "Henru",
+  "Description": "I have been working as consultant for 10 years.",
+  "Category": "Video",
+  "Subcategory": "Promotional Video",
+  "Tags": [ "Consultant", "Wriring" ],
+  "ServiceType": "Hourly basis service",
+  "LocationType": "Online",
+  "StartDate": "01/01/2024",
+  "EndDate": "06/10/2024",
+  "SkillTrade": "Credit",
+  "SkillExchange": [ "" ],
+  "Credit": "7",
+  "Active": "Active",
+  "AvailableDays": [
+    {
+      "Id": 2,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 3,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 4,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 5,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 6,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 7,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    },
+    {
+      "Id": 8,
+      "StartTime": "12:00",
+      "EndTime": "14:00"
+    }
+  ]
+}

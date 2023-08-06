@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AdvancedTask.JSON_Objects;
+using AdvancedTask.Models;
 
 namespace AdvancedTask.Pages.ProfilePageTabs
 {
@@ -46,7 +46,7 @@ namespace AdvancedTask.Pages.ProfilePageTabs
             }
             if (!found) { return; }
         }
-        public void AddNewLanguage(LanguageObject language)
+        public void AddNewLanguage(LanguageModel language)
         {
             //Add new language skill
             //Identify add new button and click
@@ -70,7 +70,7 @@ namespace AdvancedTask.Pages.ProfilePageTabs
         {
             return new[] { getLastLanguageName.Text, getLastLanguageLevel.Text };
         }
-        public void EditFirstLanguage(LanguageObject language)
+        public void EditFirstLanguage(LanguageModel language)
         {
             //Identify edit button and click
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[1]", 10);
@@ -78,12 +78,11 @@ namespace AdvancedTask.Pages.ProfilePageTabs
             //Edit language name
             editLanguageName.Click();
             editLanguageName.Clear();
-
             editLanguageName.SendKeys(language.LanguageTextbox);
-
             //Edit language level
             EditLanguageLevel(language.LanguageLevel);
             //Identify update buttonand click
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10);
             updateButton.Click();
         }
         public string[] GetFirstLanguage()

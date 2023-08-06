@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Utilities;
 using NUnit.Framework;
 using System;
@@ -13,31 +13,31 @@ namespace AdvancedTask.Test
     [Parallelizable]
     public class Language_Tests : CommonDriver
     {
-        public static ICollection<LanguageObject> ReadLanguageTests(string[] jsonFiles)
+        public static ICollection<LanguageModel> ReadLanguageTests(string[] jsonFiles)
         {
-            var languages = new List<LanguageObject>();
+            var languages = new List<LanguageModel>();
             foreach (var file in jsonFiles)
             {
-                LanguageObject language = ReadTestLanguage("JSONData\\Language\\" + file);
-                
+                LanguageModel language = ReadTestLanguage("JSONData\\Language\\" + file);
                 languages.Add(language);
             }
             return languages;
         }
-        public static ICollection<LanguageObject> ReadPositiveAddTests()
+        public static ICollection<LanguageModel> ReadPositiveAddTests()
         {
             return ReadLanguageTests(new string[] { 
                 "positiveAddNewlanguage_01.json" ,
+
                 "positiveAddNewlanguage_02.json"
             });
         }
-        public static ICollection<LanguageObject> ReadPositiveEditTests()
+        public static ICollection<LanguageModel> ReadPositiveEditTests()
         {
             return ReadLanguageTests(new string[] {
                 "positiveEditlanguage.json"
             });
         }
-        public static ICollection<LanguageObject> ReadNegativeAddTests()
+        public static ICollection<LanguageModel> ReadNegativeAddTests()
         {
             return ReadLanguageTests(new string[] {
                 "negativeAddNewLanguage_01.json",
@@ -45,13 +45,13 @@ namespace AdvancedTask.Test
                 
                });
         }
-        public static ICollection<LanguageObject> ReadNegativeAddRepeatTests()
+        public static ICollection<LanguageModel> ReadNegativeAddRepeatTests()
         {
             return ReadLanguageTests(new string[] {
                 "negativeAddRepeatLanguage_01.json"
                });
         }
-        public static ICollection<LanguageObject> ReadNegativeEditTests()
+        public static ICollection<LanguageModel> ReadNegativeEditTests()
         {
             return ReadLanguageTests(new string[] {
                 "negativeEditLanguage_01.json",
@@ -60,7 +60,7 @@ namespace AdvancedTask.Test
         }
 
         [Test, Order(1), Description("Check if user is able to add new language"), TestCaseSource(nameof(ReadPositiveAddTests))]
-        public void TestAddNewLanguageSuccessfully(LanguageObject language)
+        public void TestAddNewLanguageSuccessfully(LanguageModel language)
         {
             languagePage.AddNewLanguage(language);
             //Check if the new language record has been added
@@ -70,7 +70,7 @@ namespace AdvancedTask.Test
         }
 
         [Test, Order(2), Description("Check if user is able to edit the first language"), TestCaseSource(nameof(ReadPositiveEditTests))]
-        public void TestEditLanguageSuccessfully(LanguageObject language)
+        public void TestEditLanguageSuccessfully(LanguageModel language)
         {
             languagePage.EditFirstLanguage(language);
 
@@ -92,7 +92,7 @@ namespace AdvancedTask.Test
         }
 
         [Test, Order(4), Description("Check if user is not able to add new language"), TestCaseSource(nameof(ReadNegativeAddTests))]
-        public void TestAddNewLanguageFailed(LanguageObject language)
+        public void TestAddNewLanguageFailed(LanguageModel language)
         {
             languagePage.AddNewLanguage(language);
             //Check if the new language record has not been added 
@@ -100,8 +100,8 @@ namespace AdvancedTask.Test
             Assert.AreEqual("Please enter language and level", checkPopUpMessage,  "Actual and expected skill record do not match.");
         }
 
-        [Test, Order(5), Description("Check if user is not able to add new language"), TestCaseSource(nameof(ReadNegativeAddRepeatTests))]
-        public void TestAddRepeatLanguageFailed(LanguageObject language)
+        [Test, Order(5), Description("Check if user is not able to add repeat language"), TestCaseSource(nameof(ReadNegativeAddRepeatTests))]
+        public void TestAddRepeatLanguageFailed(LanguageModel language)
         {
             languagePage.AddNewLanguage(language);
             //Check if the new language record has not been added 
@@ -109,7 +109,7 @@ namespace AdvancedTask.Test
             Assert.AreEqual("This language is already exist in your language list.", checkPopUpMessage, "Actual and expected skill record do not match.");
         }
         [Test, Order(6), Description("Check if user is not able to edit language"), TestCaseSource(nameof(ReadNegativeEditTests))]
-        public void TestEditLanguageFailed(LanguageObject language)
+        public void TestEditLanguageFailed(LanguageModel language)
         {
             languagePage.EditFirstLanguage(language);
             //Check if the language record has not been edited 
