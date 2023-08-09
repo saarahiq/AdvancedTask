@@ -21,7 +21,7 @@ namespace AdvancedTask.Test
             var educations = new List<EducationModel>();
             foreach (var file in jsonFiles)
             {
-                EducationModel education = readEducation(file);
+                EducationModel education = readEducation("JSONData\\Education\\" + file);
                 educations.Add(education);
             }
             return educations;
@@ -66,6 +66,7 @@ namespace AdvancedTask.Test
         {
             var testFiles = new string[]
             {
+
                 "negativeEditEducation_01.json",
                 "negativeEditEducation_02.json",
                 "negativeEditEducation_03.json",

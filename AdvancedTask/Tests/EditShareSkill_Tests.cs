@@ -19,7 +19,7 @@ namespace AdvancedTask.Test
             var shareSkills = new List<ShareSkillModel>();
             foreach (var file in jsonFiles)
             {
-                ShareSkillModel shareSkill = readShareSkill(file);
+                ShareSkillModel shareSkill = readShareSkill("JSONData\\ShareSkill\\" + file);
                 shareSkills.Add(shareSkill);
             };
             return shareSkills;

@@ -142,22 +142,22 @@ namespace AdvancedTask.Utilities
 
         public static CertificationModel readCertification(string jsonCertFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Certifications\", jsonCertFile));
+            var json = File.ReadAllText(jsonCertFile);
             return JsonConvert.DeserializeObject<CertificationModel>(json);
         }
         public static SkillModel readSkills(string jsonSkillFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Skills\", jsonSkillFile));
+            var json = File.ReadAllText(jsonSkillFile);
             return JsonConvert.DeserializeObject<SkillModel>(json);
         }
         public static EducationModel readEducation(string jsonEducationFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Education\", jsonEducationFile));
+            var json = File.ReadAllText(jsonEducationFile);
             return JsonConvert.DeserializeObject<EducationModel>(json);
         }
         public static ShareSkillModel readShareSkill(string jsonShareSkillFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\EditShareSkill\", jsonShareSkillFile));
+            var json = File.ReadAllText(jsonShareSkillFile);
             return JsonConvert.DeserializeObject<ShareSkillModel>(json);
         }
     }
