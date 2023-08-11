@@ -1,3 +1,5 @@
+using AdvancedTaskSpecFlow.Pages;
+using AdvancedTaskSpecFlow.Utilities;
 using System;
 using TechTalk.SpecFlow;
 
@@ -6,10 +8,11 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
     [Binding]
     public class RegistrationFeatureStepDefinitions
     {
-        [Given(@"Launch Mars portal")]
-        public void GivenLaunchMarsPortal()
+
+        private readonly CommonDriver commonDriver;
+        public RegistrationFeatureStepDefinitions(CommonDriver commonDriver)
         {
-            
+            this.commonDriver = commonDriver;
         }
 
         [When(@"Input valid First name, Last name, Email address, Password, Confirm Password")]

@@ -74,24 +74,15 @@ namespace AdvancedTaskSpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal successfully with valid details")]
+        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal with default user")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "123456", null)]
-        [NUnit.Framework.TestCaseAttribute("ada520@example.com", "abcdefg", null)]
-        public void ISignInMarsPortalSuccessfullyWithValidDetails(string email, string password, string[] exampleTags)
+        public void ISignInMarsPortalWithDefaultUser()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "tag1"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("email", email);
-            argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal successfully with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal with default user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -101,13 +92,44 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 8
- testRunner.When(string.Format("Input valid \'{0}\' and \'{1}\'", email, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
+ testRunner.Then("I signed in  Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal successfully with valid details")]
+        [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "123456", null)]
+        [NUnit.Framework.TestCaseAttribute("ada520@example.com", "abcdefg", null)]
+        public void ISignInMarsPortalSuccessfullyWithValidDetails(string email, string password, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("email", email);
+            argumentsOfScenario.Add("password", password);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal successfully with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 11
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 12
+ testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 13
+ testRunner.When(string.Format("Input valid \'{0}\' and \'{1}\'", email, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 14
  testRunner.Then("I signed in  Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -127,7 +149,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("email", email);
             argumentsOfScenario.Add("password", password);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal failed with invalid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 17
+#line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -137,13 +159,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 18
+#line 23
  testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 19
+#line 24
  testRunner.When(string.Format("Input invalid \'{0}\' and \'{1}\'", email, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 20
+#line 25
  testRunner.Then("I signed in  Mars portal failed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

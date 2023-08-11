@@ -3,6 +3,11 @@
 As a user, I'd like to sign in Mars portal successfully.
 
 @tag1
+
+Scenario: I sign in Mars portal with default user
+	Given Launch Mars portal and login with default user
+	Then I signed in  Mars portal successfully
+
 Scenario Outline: I sign in Mars portal successfully with valid details
 	Given Launch Mars portal
 	When  Input valid '<email>' and '<password>'

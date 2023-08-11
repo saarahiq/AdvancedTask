@@ -8,15 +8,36 @@ using NUnit.Framework;
 namespace AdvancedTaskSpecFlow.StepDefinitions
 {
     [Binding]
-    public class SignInFeatureStepDefinitions:CommonDriver
+    public class SignInFeatureStepDefinitions
     {
-        private bool loginSuccess = false; 
-        public SignInFeatureStepDefinitions() : base(false) { }
+        private readonly CommonDriver commonDriver;
+        private bool loginSuccess = false;
+        public SignInFeatureStepDefinitions(CommonDriver commonDriver) 
+        { 
+            this.commonDriver = commonDriver;
+        }
+
+        [Given(@"Launch Mars portal")]
+        public void GivenLaunchMarsPortal()
+        {
+            //Open chrome browser
+            commonDriver.driver.Manage().Window.Maximize();
+            //Launch Mars portal
+            commonDriver.driver.Navigate().GoToUrl("http://localhost:5000");
+        }
+
+        [Given(@"Launch Mars portal and login with default user")]
+        public void GivenLaunchMarsPortalAndLoginWithDefaultUser()
+        {
+            GivenLaunchMarsPortal();
+            this.loginSuccess = commonDriver.signInPage.SignIn("mars.advanced@example.com", "123456");
+        }
+
         [When(@"Input valid '([^']*)' and '([^']*)'")]
         public void WhenInputValidAnd(string email, string password)
         {
             //Sign in Mars portal with valid details
-            this.loginSuccess = signInPage.SignIn(email, password);
+            this.loginSuccess = commonDriver.signInPage.SignIn(email, password);
         }
 
         [Then(@"I signed in  Mars portal successfully")]
@@ -30,7 +51,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
         public void WhenInputInvalidAnd(string email, string password)
         {
             //Sign in Mars portal with invalid details
-            this.loginSuccess = signInPage.SignIn(email, password);
+            this.loginSuccess = commonDriver.signInPage.SignIn(email, password);
         }
 
         [Then(@"I signed in  Mars portal failed")]
