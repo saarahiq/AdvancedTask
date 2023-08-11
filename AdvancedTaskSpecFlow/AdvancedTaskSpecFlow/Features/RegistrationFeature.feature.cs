@@ -35,7 +35,8 @@ namespace AdvancedTaskSpecFlow.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RegistrationFeature", "As a new user, I\'d like to join Mars portal with valid details.", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RegistrationFeature", "As a new user, I\'d like to join Mars portal successfully with valid details.\r\nAs " +
+                    "a new user, I can\'t join Mars portal with invalid details.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,15 +75,30 @@ namespace AdvancedTaskSpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("register mars portal with valid details")]
+        [NUnit.Framework.DescriptionAttribute("01) A new user register mars portal with valid details")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public void RegisterMarsPortalWithValidDetails()
+        [NUnit.Framework.TestCaseAttribute("ada520", "Zhang", "ada520.task@example.com", "123456", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("ada520", "Zhang", "ada520.task@example.com", "abcdefg", "abcdefg", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("ada520", "Zhang", "ada520.task@example.com", "abc@def", "abc@def", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("ada520", "Zhang", "ada520.task@example.com", "abc@123", "abc@123", "yes", null)]
+        public void _01ANewUserRegisterMarsPortalWithValidDetails(string firstName, string lastName, string emailAddress, string password, string confirmPassword, string agreeToTC, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "mytag"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("register mars portal with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 5
+            argumentsOfScenario.Add("firstName", firstName);
+            argumentsOfScenario.Add("lastName", lastName);
+            argumentsOfScenario.Add("emailAddress", emailAddress);
+            argumentsOfScenario.Add("password", password);
+            argumentsOfScenario.Add("confirmPassword", confirmPassword);
+            argumentsOfScenario.Add("agreeToTC", agreeToTC);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) A new user register mars portal with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -92,14 +108,59 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 6
+#line 7
  testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 7
- testRunner.When("Input valid First name, Last name, Email address, Password, Confirm Password", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 8
+ testRunner.When(string.Format("Input valid \'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\'", firstName, lastName, emailAddress, password, confirmPassword, agreeToTC), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
  testRunner.Then("I registered Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("02) A new user failed to register mars portal with invalid details")]
+        [NUnit.Framework.TestCaseAttribute("", "Zhang", "poppy.task@example.com", "123456", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "", "poppy.task@example.com", "123456", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.taskexample.com", "123456", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "ada.task@example.com", "123456", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.task@example.com", "", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.task@example.com", "12345", "123456", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.task@example.com", "123456", "", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.task@example.com", "123456", "1234567", "yes", null)]
+        [NUnit.Framework.TestCaseAttribute("Poppy", "Zhang", "poppy.task@example.com", "123456", "123456", "no", null)]
+        public void _02ANewUserFailedToRegisterMarsPortalWithInvalidDetails(string firstName, string lastName, string emailAddress, string password, string confirmPassword, string agreeToTC, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("firstName", firstName);
+            argumentsOfScenario.Add("lastName", lastName);
+            argumentsOfScenario.Add("emailAddress", emailAddress);
+            argumentsOfScenario.Add("password", password);
+            argumentsOfScenario.Add("confirmPassword", confirmPassword);
+            argumentsOfScenario.Add("agreeToTC", agreeToTC);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) A new user failed to register mars portal with invalid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 19
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 20
+ testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 21
+ testRunner.When(string.Format("Input invalid \'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\'", firstName, lastName, emailAddress, password, confirmPassword, agreeToTC), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 22
+ testRunner.Then("I registered Mars portal failed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

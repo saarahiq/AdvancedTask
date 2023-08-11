@@ -1,4 +1,5 @@
-﻿using AdvancedTaskSpecFlow.Utilities;
+﻿using AdvancedTaskSpecFlow.PageObjectComponents;
+using AdvancedTaskSpecFlow.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -12,9 +13,11 @@ namespace AdvancedTaskSpecFlow.Pages
     public class SignInPage
     {
         readonly IWebDriver driver;
+        readonly QuitDialogComponent quitDialogComponent;
         public SignInPage(IWebDriver driver)
         {
             this.driver = driver;
+            this.quitDialogComponent = new(driver);
         }
         private IWebElement signInButton => driver.FindElement(By.XPath("//*[@id=\"home\"]/div/div/div[1]/div/a"));
         private IWebElement emailTextbox => driver.FindElement(By.XPath("/html/body/div[2]/div/div/div[1]/div/div[1]/input"));
@@ -43,7 +46,9 @@ namespace AdvancedTaskSpecFlow.Pages
             }
             catch (Exception ex)
             {
+                quitDialogComponent.QuitDialog();
                 return false;
+
             }
 
         }
@@ -54,9 +59,6 @@ namespace AdvancedTaskSpecFlow.Pages
             return userName.Text;
         }
 
-        public void QuitDialog()
-        {
-            new Actions(driver).SendKeys(Keys.Escape).Perform();
-        }
+       
     }
 }
