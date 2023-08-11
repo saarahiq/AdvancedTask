@@ -106,7 +106,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 10
- testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 11
  testRunner.When(string.Format("Input valid \'{0}\',\'{1}\'", languageLevel, languageName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
