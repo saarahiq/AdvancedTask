@@ -1,4 +1,4 @@
-﻿using AdvancedTask.Models;
+using AdvancedTask.Models;
 using AdvancedTask.Utilities;
 using OpenQA.Selenium;
 using System;

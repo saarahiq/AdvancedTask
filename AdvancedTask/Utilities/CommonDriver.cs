@@ -19,6 +19,8 @@ using AdvancedTask.Pages.ProfilePageTabs;
 using AdvancedTask.Models;
 using RazorEngine;
 using Language = AdvancedTask.Pages.ProfilePageTabs.Language;
+using Gherkin.CucumberMessages.Types;
+using AdvancedTask.PageObjectComponent;
 
 namespace AdvancedTask.Utilities
 {
@@ -40,6 +42,12 @@ namespace AdvancedTask.Utilities
         public static ExtentReports extent;
         #endregion
 
+        public Description descriptionPage;
+        public ManageListingsPage manageListingsPage;
+        public ChatPage chatPage;
+        public SearchSkillPage searchSkillPage;
+        public NotificationsPage notificationsPage;
+        public MenuNavigation menuNavigation;
         private bool login;
         public CommonDriver() : this(true) { }
         public CommonDriver(bool login) { this.login = login; }
@@ -61,11 +69,17 @@ namespace AdvancedTask.Utilities
 
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
-            this.languagePage = new Language(driver);
+            this.descriptionPage = new Description(driver);
+            this.manageListingsPage = new ManageListingsPage(driver);
+            this.chatPage = new ChatPage(driver);
+            this.searchSkillPage = new SearchSkillPage(driver);
+            this.menuNavigation = new MenuNavigation(driver);
+            //this.notificationsPage = new NotificationsPage(driver);
             this.shareSkillPage = new ShareSkillPage(driver);
             this.manageRequestPage = new ManageRequestPage(driver);
             this.notificationsPage = new Notifications(driver);
             this.testUser = ReadTestUser("JSONData\\TestUser.json");
+           
             //Open chrome browser
             driver.Manage().Window.Maximize();
 
@@ -97,6 +111,24 @@ namespace AdvancedTask.Utilities
             screenShot.SaveAsFile(fileName.ToString(), ScreenshotImageFormat.Png);
             return fileName.ToString();
         }
+
+        public static DescriptionObject ReadTestDescription(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<DescriptionObject>(json);
+        }
+        public static SearchskillObject ReadTestSearchskill(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<SearchskillObject>(json);
+        }
+
+        public static ChatObject ReadTestChat(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<ChatObject>(json);
+        }
+
         [TearDown]
         public void TearDown()
         {

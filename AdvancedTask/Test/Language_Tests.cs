@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedTask.Test
 {
-    [TestFixture]
-    [Parallelizable]
+   
     public class Language_Tests : CommonDriver
     {
         public static ICollection<LanguageModel> ReadLanguageTests(string[] jsonFiles)
