@@ -25,7 +25,7 @@ namespace AdvancedTask.Test
             var skills = new List<SkillModel>();
             foreach (var file in jsonFiles)
             {
-                SkillModel skill = readSkills(file);
+                SkillModel skill = readSkills("JSONData\\Skills\\" + file);
                 skills.Add(skill);
             }
             return skills;

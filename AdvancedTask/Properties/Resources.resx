@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfigPath" xml:space="preserve">
-    <value>C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\ExtentReports\</value>
+    <value>C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport</value>
   </data>
   <data name="ExtentReportPath" xml:space="preserve">
-    <value>C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\ExtentReports\TestReports.html</value>
+    <value>C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport</value>
   </data>
   <data name="ScreenshotPath" xml:space="preserve">
-    <value>C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\Screenshots\</value>
+    <value>C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport\Screenshots</value>
   </data>
 </root>

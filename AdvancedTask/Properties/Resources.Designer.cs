@@ -61,7 +61,7 @@ namespace AdvancedTask.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\ExtentReports\.
+        ///   Looks up a localized string similar to C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport.
         /// </summary>
         internal static string ConfigPath {
             get {
@@ -70,7 +70,7 @@ namespace AdvancedTask.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\ExtentReports\TestReports.html.
+        ///   Looks up a localized string similar to C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport.
         /// </summary>
         internal static string ExtentReportPath {
             get {
@@ -79,7 +79,7 @@ namespace AdvancedTask.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\Reports\Screenshots\.
+        ///   Looks up a localized string similar to C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTask\TestReport\Screenshots.
         /// </summary>
         internal static string ScreenshotPath {
             get {

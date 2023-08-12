@@ -29,7 +29,7 @@ namespace AdvancedTask.Test
             var certifications = new List<CertificationModel>();
             foreach (var file in jsonFiles)
             {
-                CertificationModel certification = readCertification(file);
+                CertificationModel certification = readCertification("JSONData\\Certifications\\" + file);
                 certifications.Add(certification);
             }
             return certifications;

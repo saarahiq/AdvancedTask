@@ -1,0 +1,45 @@
+{
+  "Title": "Susan",
+  "Description": "I'm playing with my little brother'.",
+  "Category": "Graphics & Design",
+  "Subcategory": "Logo Design",
+  "Tags": [ "Selling" ],
+  "ServiceType": "Hourly basis service",
+  "LocationType": "On-site",
+  "StartDate": "01/12/2023",
+  "EndDate": "2023-12-31",
+  "SkillTrade": "SkillExchange",
+  "SkillExchange": [ "Dancing", "Singing" ],
+  "Credit": "",
+  "Active": "Active",
+  "AvailableDays": [
+    {
+      "Id": 3,
+      "StartTime": "9:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 4,
+      "StartTime": "9:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 5,
+      "StartTime": "9:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 6,
+      "StartTime": "9:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 7,
+      "StartTime": "9:00",
+      "EndTime": "17:00"
+    }
+  ]
+}
+
+
+

@@ -1,5 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
-using AdvancedTask.Pages;
+﻿using AdvancedTask.Pages;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using Newtonsoft.Json;
@@ -26,9 +25,13 @@ namespace AdvancedTask.Utilities
     public class CommonDriver
     {
         public IWebDriver driver;
-        public UserObject testUser;
+        public UserModel testUser;
         public Language languagePage;
+        public ShareSkillPage shareSkillPage;
+        public ManageRequestPage manageRequestPage;
+        public Notifications notificationsPage;
         public MarsLoginPage marsLoginPage;
+
         public static string ScreenshotPath = Properties.Resources.ScreenshotPath;
         public static string ReportPath = Properties.Resources.ExtentReportPath;
 
@@ -36,6 +39,10 @@ namespace AdvancedTask.Utilities
         public static ExtentTest test;
         public static ExtentReports extent;
         #endregion
+
+        private bool login;
+        public CommonDriver() : this(true) { }
+        public CommonDriver(bool login) { this.login = login; }
 
         //Page object initialization
         [OneTimeSetUp]
@@ -55,13 +62,19 @@ namespace AdvancedTask.Utilities
             this.driver = new ChromeDriver();
             this.marsLoginPage = new MarsLoginPage(driver);
             this.languagePage = new Language(driver);
+            this.shareSkillPage = new ShareSkillPage(driver);
+            this.manageRequestPage = new ManageRequestPage(driver);
+            this.notificationsPage = new Notifications(driver);
             this.testUser = ReadTestUser("JSONData\\TestUser.json");
             //Open chrome browser
             driver.Manage().Window.Maximize();
 
             //Launch Mars portal
             driver.Navigate().GoToUrl("http://localhost:5000");
-            marsLoginPage.Login(this.testUser);
+            if (login)
+            {
+                marsLoginPage.Login(this.testUser);
+            }
             
         }
 
@@ -93,8 +106,6 @@ namespace AdvancedTask.Utilities
             // end test. (Reports)
 
             // calling Flush writes everything to the log file (Reports)
-            
-            driver.Close();
             driver.Quit();
 
         }
@@ -112,34 +123,41 @@ namespace AdvancedTask.Utilities
             string relPath = Path.GetRelativePath(TestReport.GetReportPath(), localPath);
             return relPath;
         }
-        public static UserObject ReadTestUser(string path)
+        public static UserModel ReadTestUser(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<UserObject>(json);
+            return JsonConvert.DeserializeObject<UserModel>(json);
         }
-        public static LanguageObject ReadTestLanguage(string path)
+        public static LanguageModel ReadTestLanguage(string path)
         {
             var json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<LanguageObject>(json);
+            return JsonConvert.DeserializeObject<LanguageModel>(json);
         }
+
+        public static AddShareSkillModel ReadTestShareSkill(string path)
+        {
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<AddShareSkillModel>(json);
+        }
+
         public static CertificationModel readCertification(string jsonCertFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Certifications\", jsonCertFile));
+            var json = File.ReadAllText(jsonCertFile);
             return JsonConvert.DeserializeObject<CertificationModel>(json);
         }
         public static SkillModel readSkills(string jsonSkillFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Skills\", jsonSkillFile));
+            var json = File.ReadAllText(jsonSkillFile);
             return JsonConvert.DeserializeObject<SkillModel>(json);
         }
         public static EducationModel readEducation(string jsonEducationFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\Education\", jsonEducationFile));
+            var json = File.ReadAllText(jsonEducationFile);
             return JsonConvert.DeserializeObject<EducationModel>(json);
         }
         public static ShareSkillModel readShareSkill(string jsonShareSkillFile)
         {
-            var json = File.ReadAllText(String.Concat(@"C:\Users\saara\source\repos\AdvancedTask\AdvancedTask\JSONData\EditShareSkill\", jsonShareSkillFile));
+            var json = File.ReadAllText(jsonShareSkillFile);
             return JsonConvert.DeserializeObject<ShareSkillModel>(json);
         }
     }

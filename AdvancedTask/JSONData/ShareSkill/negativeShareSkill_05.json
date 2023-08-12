@@ -1,0 +1,32 @@
+{
+  "Title": "Poppy",
+  "Description": "I like palying basketball.",
+  "Category": "Digital Marketing",
+  "Subcategory": "Video Marketing",
+  "Tags": [ "Buying" ],
+  "ServiceType": "One-off service",
+  "LocationType": "Online",
+  "StartDate": "12/12/2022",
+  "EndDate": "",
+  "SkillTrade": "Credit",
+  "SkillExchange": [ "" ],
+  "Credit": "9",
+  "Active": "Hidden",
+  "AvailableDays": [
+    {
+      "Id": 3,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 5,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 7,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    }
+  ]
+}

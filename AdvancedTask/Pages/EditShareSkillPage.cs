@@ -22,7 +22,6 @@ namespace AdvancedTask.Pages
         {
             this.driver = driver;
         }
-        private IWebElement EditButton => driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i"));
         private IWebElement Title => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input"));
         private IWebElement Description => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[2]/div/div[2]/div[1]/textarea"));
         private IWebElement CategoryDropDown => driver.FindElement(By.XPath("//*[@id='service-listing-section']/div[2]/div/form/div[3]/div[2]/div/div[1]/select"));
@@ -34,15 +33,10 @@ namespace AdvancedTask.Pages
         private IWebElement CreditAmount => driver.FindElement(By.Name("charge"));
         private IWebElement Save => driver.FindElement(By.XPath("//input[@value='Save']"));
         private IWebElement CancelButton => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[11]/div/input[2]"));
-        public void goToManageListingsPage()
-        {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i", 10);
-            EditButton.Click();
 
-            Wait.WaitToBeVisible(driver, "XPath", "//*[@id='service-listing-section']/div[2]/div/form/div[1]/div/div[2]/div/div[1]/input", 10);
-        }
         public void editShareSkill(string title, string description, string category, string subCategory, List<string> tagsToRemove, List<string> tagsToAdd, string serviceType, string locationType, AvailableDaysModel availableDays, string skillTrade, string credit, List<String> skillExchangeTagsToRemove, List<String> skillExchangeTagsToAdd, string workSampleFilename, string active)
         {
+            Thread.Sleep(1500);
             Title.SendKeys(Keys.Control + "A");
             Title.SendKeys(Keys.Backspace);
             Title.SendKeys(title);
