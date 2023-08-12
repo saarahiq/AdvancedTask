@@ -10,6 +10,7 @@ using NUnit.Framework;
 using AdvancedTask.Pages.ProfilePageTabs;
 using TechTalk.SpecFlow;
 using System.Text;
+using AdvancedTask.Pages;
 
 namespace AdvancedTaskSpecFlow.Utilities
 {
@@ -28,6 +29,9 @@ namespace AdvancedTaskSpecFlow.Utilities
         public PopUpComponent popUpComponent;
         public Education educationPage;
         public Certification certificationPage;
+        public NavigationMenu navigationMenu;
+        public ManageRequests manageRequestsPage;
+        public ChatHistoryPage chatHistoryPage;
 
         public static string ScreenshotPath = Resources.ScreenshotPath;
         public static string ReportPath = Resources.ExtentReportPath;
@@ -60,6 +64,9 @@ namespace AdvancedTaskSpecFlow.Utilities
             this.popUpComponent = new PopUpComponent(driver);
             this.educationPage = new Education(driver);
             this.certificationPage = new Certification(driver);
+            this.navigationMenu = new NavigationMenu(driver);
+            this.manageRequestsPage = new ManageRequests(driver);
+            this.chatHistoryPage = new ChatHistoryPage(driver);
         }
 
         [AfterTestRun]
