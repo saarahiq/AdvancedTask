@@ -61,20 +61,20 @@ namespace AdvancedTaskSpecFlow {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTaskSpecFlow\AdvancedTaskSpecFlow\Reports\ExtentReports\.
-        /// </summary>
-        internal static string ConfigPath {
-            get {
-                return ResourceManager.GetString("ConfigPath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTaskSpecFlow\AdvancedTaskSpecFlow\Reports\ExtentReports\TestReports.html.
         /// </summary>
         internal static string ExtentReportPath {
             get {
                 return ResourceManager.GetString("ExtentReportPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTaskSpecFlow\AdvancedTaskSpecFlow\Screenshots\.
+        /// </summary>
+        internal static string ScreenshotPath {
+            get {
+                return ResourceManager.GetString("ScreenshotPath", resourceCulture);
             }
         }
     }

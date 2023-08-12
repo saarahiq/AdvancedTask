@@ -55,6 +55,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
                 Assert.AreEqual(skill, newSkillAdded[0], "Actual and expected skill record do not match");
                 Assert.AreEqual(skillLevel, newSkillAdded[1], "Actual and expected skill record do not match");
             }
+            commonDriver.SaveScreenshot("Skills Tests");
         }
 
         [Given(@"I logged in successfully and navigate to Skills Tab to edit")]
@@ -81,8 +82,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
                 Assert.AreEqual(skill, updatedSkillAdded[0], "Actual and expected skill record do not match");
                 Assert.AreEqual(skillLevel, updatedSkillAdded[1], "Actual and expected skill record do not match");
             }
-
-
+            commonDriver.SaveScreenshot("Skills Tests");
         }
 
         [Given(@"I logged in successfully and navigate to Skills Tab to delete")]
@@ -102,6 +102,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
         {
             string popUpMessage = commonDriver.popUpComponent.getMessage();
             Assert.AreEqual(message, popUpMessage, "Actual and expected certification record do not match.");
+            commonDriver.SaveScreenshot("Skills Tests");
         }
     }
 }
