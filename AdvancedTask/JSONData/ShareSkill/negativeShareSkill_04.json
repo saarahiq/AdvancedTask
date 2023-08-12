@@ -1,0 +1,32 @@
+{
+  "Title": "Hello World",
+  "Description": "I am a software tester.",
+  "Category": "Programming & Tech",
+  "Subcategory": "QA",
+  "Tags": [ "" ],
+  "ServiceType": "One-off service",
+  "LocationType": "Online",
+  "StartDate": "",
+  "EndDate": "",
+  "SkillTrade": "SkillExchange",
+  "SkillExchange": [ "" ],
+  "Credit": "",
+  "Active": "Hidden",
+  "AvailableDays": [
+    {
+      "Id": 3,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 5,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    },
+    {
+      "Id": 7,
+      "StartTime": "10:00",
+      "EndTime": "17:00"
+    }
+  ]
+}

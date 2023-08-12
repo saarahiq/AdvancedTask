@@ -1,4 +1,4 @@
-﻿using AdvancedTask.JSON_Objects;
+﻿using AdvancedTask.Models;
 using AdvancedTask.Pages;
 using AdvancedTask.Utilities;
 using Newtonsoft.Json;
@@ -15,15 +15,13 @@ namespace AdvancedTask.Test
     [Parallelizable]
     public class Registration_Tests : CommonDriver
     {
-
         public Registration_Tests() : base(false) { }
-
-        public static ICollection<UserObject> ReadRegistrationTests(string[] jsonFiles, bool randomEmail = false)
+        public static ICollection<UserModel> ReadRegistrationTests(string[] jsonFiles, bool randomEmail = false)
         {
-            var users = new List<UserObject>();
+            var users = new List<UserModel>();
             foreach (var file in jsonFiles)
             {
-                UserObject user = ReadTestUser("JSONData\\Registration\\" + file);
+                UserModel user = ReadTestUser("JSONData\\Registration\\" + file);
                 if (randomEmail)
                 {
                     int i = user.Email.IndexOf("@");
@@ -35,12 +33,12 @@ namespace AdvancedTask.Test
             }
             return users;
         }
-        public static ICollection<UserObject> ReadPositiveTests()
+        public static ICollection<UserModel> ReadPositiveTests()
         {
             return ReadRegistrationTests(new string[] { "positiveRegistration_01.json" }, true);
         }
 
-        public static ICollection<UserObject> ReadNegativeTests()
+        public static ICollection<UserModel> ReadNegativeTests()
         {
             return ReadRegistrationTests(new string[] {
                 "negativeRegistration_01.json",
@@ -56,14 +54,14 @@ namespace AdvancedTask.Test
         }
 
         [Test, Order(1), Description("Register successfully"), TestCaseSource(nameof(ReadPositiveTests))]
-        public void TestRegisterSuccessfully(UserObject user)
+        public void TestRegisterSuccessfully(UserModel user)
         {
             var success = marsLoginPage.Register(user);
             Assert.IsTrue(success);
         }
 
         [Test, Order(2), Description("Register Failed"), TestCaseSource(nameof(ReadNegativeTests))]
-        public void TestRegisterFailed(UserObject user)
+        public void TestRegisterFailed(UserModel user)
         {
             var success = marsLoginPage.Register(user);
             Assert.IsFalse(success);
