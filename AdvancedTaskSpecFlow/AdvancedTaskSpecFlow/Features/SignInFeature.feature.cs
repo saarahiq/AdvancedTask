@@ -74,14 +74,14 @@ namespace AdvancedTaskSpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal with default user")]
+        [NUnit.Framework.DescriptionAttribute("01) I sign in Mars portal with default user")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public void ISignInMarsPortalWithDefaultUser()
+        public void _01ISignInMarsPortalWithDefaultUser()
         {
             string[] tagsOfScenario = new string[] {
                     "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal with default user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) I sign in Mars portal with default user", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -137,18 +137,18 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal failed with invalid details")]
+        [NUnit.Framework.DescriptionAttribute("02) I sign in Mars portal failed with invalid details")]
         [NUnit.Framework.TestCaseAttribute("", "123456", null)]
         [NUnit.Framework.TestCaseAttribute("advanced.taskexample.com", "123456", null)]
         [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "", null)]
         [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "1234567", null)]
-        public void ISignInMarsPortalFailedWithInvalidDetails(string email, string password, string[] exampleTags)
+        public void _02ISignInMarsPortalFailedWithInvalidDetails(string email, string password, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("email", email);
             argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal failed with invalid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) I sign in Mars portal failed with invalid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
