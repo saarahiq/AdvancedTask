@@ -30,10 +30,8 @@ namespace AdvancedTaskSpecFlow.Pages
             // Wait for edit button to be clickable and click it.
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i", 10);
             driver.FindElement(By.XPath("//*[@id='listing-management-section']/div[2]/div[1]/div[1]/table/tbody/tr/td[8]/div/button[2]/i")).Click();
-
-
-    }
-    public void goToManageRequestsReceivedRequestPage()
+        }
+        public void goToManageRequestsReceivedRequestPage()
         {
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]", 15);
             //Hover over Manage Requests button

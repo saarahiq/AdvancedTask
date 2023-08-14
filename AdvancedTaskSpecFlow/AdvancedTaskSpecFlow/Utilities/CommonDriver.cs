@@ -32,6 +32,7 @@ namespace AdvancedTaskSpecFlow.Utilities
         public NavigationMenu navigationMenu;
         public ManageRequests manageRequestsPage;
         public ChatHistoryPage chatHistoryPage;
+        public EditShareSkillPage editShareSkillPage;
 
         public static string ScreenshotPath = Resources.ScreenshotPath;
         public static string ReportPath = Resources.ExtentReportPath;
@@ -67,7 +68,8 @@ namespace AdvancedTaskSpecFlow.Utilities
             this.navigationMenu = new NavigationMenu(driver);
             this.manageRequestsPage = new ManageRequests(driver);
             this.chatHistoryPage = new ChatHistoryPage(driver);
-        }
+            this.editShareSkillPage = new EditShareSkillPage(driver);
+    }
 
         [AfterTestRun]
         public static void AfterTestRun()
