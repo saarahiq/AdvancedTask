@@ -19,11 +19,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
 
         public void LoginAndGoToEducationTab()
         {
-            //Open chrome browser
-            commonDriver.driver.Manage().Window.Maximize();
-            //Launch Mars portal
-            commonDriver.driver.Navigate().GoToUrl("http://localhost:5000");
-            var loggedInSuccessfully = commonDriver.signInPage.SignIn("jessica@hotmail.com", "123123");
+            bool loggedInSuccessfully = commonDriver.Login("jessica@hotmail.com", "123123");
             if (loggedInSuccessfully)
             {
                 commonDriver.profilePage.goToEducationTab();

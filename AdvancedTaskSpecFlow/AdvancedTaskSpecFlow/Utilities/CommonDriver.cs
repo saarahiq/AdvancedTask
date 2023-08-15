@@ -10,11 +10,12 @@ using NUnit.Framework;
 using AdvancedTask.Pages.ProfilePageTabs;
 using TechTalk.SpecFlow;
 using System.Text;
+using AdvancedTask.Pages;
 
 namespace AdvancedTaskSpecFlow.Utilities
 {
     [Binding]
-    public class CommonDriver: IDisposable
+    public class CommonDriver : IDisposable
     {
         public IWebDriver driver;
         public Language language;
@@ -28,6 +29,10 @@ namespace AdvancedTaskSpecFlow.Utilities
         public PopUpComponent popUpComponent;
         public Education educationPage;
         public Certification certificationPage;
+        public NavigationMenu navigationMenu;
+        public ManageRequests manageRequestsPage;
+        public ChatHistoryPage chatHistoryPage;
+        public EditShareSkillPage editShareSkillPage;
 
         public static string ScreenshotPath = Resources.ScreenshotPath;
         public static string ReportPath = Resources.ExtentReportPath;
@@ -45,7 +50,7 @@ namespace AdvancedTaskSpecFlow.Utilities
             test = extent.CreateTest("AdvancedTaskSpecFlow");
         }
 
-        public CommonDriver() 
+        public CommonDriver()
         {
 
             this.driver = new ChromeDriver();
@@ -60,6 +65,19 @@ namespace AdvancedTaskSpecFlow.Utilities
             this.popUpComponent = new PopUpComponent(driver);
             this.educationPage = new Education(driver);
             this.certificationPage = new Certification(driver);
+            this.navigationMenu = new NavigationMenu(driver);
+            this.manageRequestsPage = new ManageRequests(driver);
+            this.chatHistoryPage = new ChatHistoryPage(driver);
+            this.editShareSkillPage = new EditShareSkillPage(driver);
+        }
+
+        public bool Login(string email, string password)
+        {
+            //Open chrome browser
+            this.driver.Manage().Window.Maximize();
+            //Launch Mars portal
+            this.driver.Navigate().GoToUrl("http://localhost:5000");
+            return signInPage.SignIn(email, password);
         }
 
         [AfterTestRun]
@@ -91,7 +109,7 @@ namespace AdvancedTaskSpecFlow.Utilities
         public void Dispose()
         {
             driver.Dispose();
-            
+
         }
     }
 }
