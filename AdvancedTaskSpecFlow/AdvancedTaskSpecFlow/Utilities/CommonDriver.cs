@@ -15,7 +15,7 @@ using AdvancedTask.Pages;
 namespace AdvancedTaskSpecFlow.Utilities
 {
     [Binding]
-    public class CommonDriver: IDisposable
+    public class CommonDriver : IDisposable
     {
         public IWebDriver driver;
         public Language language;
@@ -50,7 +50,7 @@ namespace AdvancedTaskSpecFlow.Utilities
             test = extent.CreateTest("AdvancedTaskSpecFlow");
         }
 
-        public CommonDriver() 
+        public CommonDriver()
         {
 
             this.driver = new ChromeDriver();
@@ -69,7 +69,16 @@ namespace AdvancedTaskSpecFlow.Utilities
             this.manageRequestsPage = new ManageRequests(driver);
             this.chatHistoryPage = new ChatHistoryPage(driver);
             this.editShareSkillPage = new EditShareSkillPage(driver);
-    }
+        }
+
+        public bool Login(string email, string password)
+        {
+            //Open chrome browser
+            this.driver.Manage().Window.Maximize();
+            //Launch Mars portal
+            this.driver.Navigate().GoToUrl("http://localhost:5000");
+            return signInPage.SignIn(email, password);
+        }
 
         [AfterTestRun]
         public static void AfterTestRun()
@@ -100,7 +109,7 @@ namespace AdvancedTaskSpecFlow.Utilities
         public void Dispose()
         {
             driver.Dispose();
-            
+
         }
     }
 }
