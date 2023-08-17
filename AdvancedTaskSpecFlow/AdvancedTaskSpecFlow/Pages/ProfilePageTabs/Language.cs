@@ -1,4 +1,5 @@
 ﻿using AdvancedTaskSpecFlow.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -27,10 +28,13 @@ namespace AdvancedTaskSpecFlow.Pages.ProfilePageTabs
         private IWebElement getLastLanguageLevel => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]"));
         private IWebElement firstEditButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[1]"));
         private IWebElement editLanguageName => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/div[1]/input"));
+        private IWebElement clearLanguageLevel => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/div[2]/select"));
         private IWebElement updateButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]"));
         private IWebElement firstLanguageName => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[1]"));
         private IWebElement firstLanguageLevel => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[2]"));
-        private IWebElement deleteButton => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[2]"));
+        private ICollection<IWebElement> languageRecordsOption => driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[1]"));
+        private ICollection<IWebElement> languageRecords => driver.FindElements(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr"));
+        
         private void SelectLanguageLevel(string languageLevel)
         {
             //Select language level from language level dropdown
@@ -49,7 +53,7 @@ namespace AdvancedTaskSpecFlow.Pages.ProfilePageTabs
         }
         
 
-        public void AddNewLanguage(string languageLevel,string languageName)
+        public void AddNewLanguage(string languageName, string languageLevel)
         {
             //Add new language skill
             //Identify add new button and click
@@ -90,7 +94,7 @@ namespace AdvancedTaskSpecFlow.Pages.ProfilePageTabs
         {
             return new[] { getLastLanguageName.Text, getLastLanguageLevel.Text };
         }
-        public void EditFirstLanguage(string languageLevel,string languageName)
+        public void EditFirstLanguage(string languageName, string languageLevel )
         {
             //Identify edit button and click
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[1]", 10);
@@ -100,6 +104,8 @@ namespace AdvancedTaskSpecFlow.Pages.ProfilePageTabs
             editLanguageName.Clear();
             editLanguageName.SendKeys(languageName);
             //Edit language level
+            firstLanguageLevelDropdown.Click();
+            clearLanguageLevel.Click();
             EditLanguageLevel(languageLevel);
             //Identify update buttonand click
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td/div/span/input[1]", 10);
@@ -109,13 +115,30 @@ namespace AdvancedTaskSpecFlow.Pages.ProfilePageTabs
         {
             return new[] { firstLanguageName.Text, firstLanguageLevel.Text };
         }
-        public void DeleteFirstlanguage()
+
+        public bool Deletelanguage(string languageName)
         {
-            //Identify delete button and click
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[2]", 10);
-            deleteButton.Click();
+            //Identify delete language record
+            var found = false;
+            foreach (var option in languageRecords)
+            {
+                var name = option.FindElement(By.XPath(".//td[1]"));
+                var delete = option.FindElement(By.XPath(".//td[3]/span[2]"));
+
+                TestContext.WriteLine("print3" + name.Text);
+                TestContext.WriteLine("print3" + delete);
+                TestContext.WriteLine("print3" + option);
+                if (name.Text == languageName)
+
+                {
+                    found = true;
+                    delete.Click();
+                    
+                }
+            }
+            return found;          
         }
-        
+
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿Feature: SignInFeature
 
 As a user, I'd like to sign in Mars portal successfully.
+As a user, I can't sign in Mars portal with invalid details.
 
 @tag1
 

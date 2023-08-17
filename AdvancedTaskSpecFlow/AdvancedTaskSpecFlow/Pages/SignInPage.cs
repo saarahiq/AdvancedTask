@@ -1,4 +1,4 @@
-﻿using AdvancedTaskSpecFlow.PageObjectComponents;
+﻿using AdvancedTaskSpecFlow.Pages.PageObjectComponents;
 using AdvancedTaskSpecFlow.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;

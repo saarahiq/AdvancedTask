@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedTaskSpecFlow.PageObjectComponents
+namespace AdvancedTaskSpecFlow.Pages.PageObjectComponents
 {
     public class QuitDialogComponent
     {
