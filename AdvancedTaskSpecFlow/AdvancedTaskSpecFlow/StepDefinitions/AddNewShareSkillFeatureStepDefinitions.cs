@@ -1,45 +1,98 @@
+using AdvancedTaskSpecFlow.Models;
+using AdvancedTaskSpecFlow.Pages;
+using AdvancedTaskSpecFlow.Pages.ProfilePageTabs;
+using AdvancedTaskSpecFlow.Utilities;
+using AventStack.ExtentReports.Model;
+using Microsoft.CodeAnalysis;
+using NUnit.Framework;
 using System;
+using System.Data;
 using TechTalk.SpecFlow;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace AdvancedTaskSpecFlow.StepDefinitions
 {
     [Binding]
     public class AddNewShareSkillFeatureStepDefinitions
     {
-        [When(@"I click on add button and input valid '([^']*)', '([^']*)'d like to exchange my interview skill traing with other skills\.'([^']*)'Business'([^']*)'Presentations'([^']*)'Selling'([^']*)'Hourly basis service'([^']*)'On-site'([^']*)'(.*)/(.*)'([^']*)''([^']*)'Credit'([^']*)''([^']*)'(.*)'([^']*)'Hidden'")]
-        public void WhenIClickOnAddButtonAndInputValidDLikeToExchangeMyInterviewSkillTraingWithOtherSkills_BusinessPresentationsSellingHourlyBasisServiceOn_SiteCreditHidden(string p0, string i, string p2, string p3, string p4, string p5, string p6, string p7, Decimal p8, int p9, string p10, string p11, string p12, string p13, int p14, string p15)
+        private readonly CommonDriver commonDriver;
+        public AddNewShareSkillFeatureStepDefinitions(CommonDriver commonDriver)
         {
-            throw new PendingStepException();
+            this.commonDriver = commonDriver;
         }
 
-        [Then(@"The new share skill with '([^']*)', '([^']*)'d like to exchange my interview skill traing with other skills\.'([^']*)'Business'([^']*)'Presentations'([^']*)'Selling'([^']*)'Hourly basis service'([^']*)'On-site'([^']*)'(.*)/(.*)'([^']*)''([^']*)'Credit'([^']*)''([^']*)'(.*)'([^']*)'Hidden'should be added successfully")]
-        public void ThenTheNewShareSkillWithDLikeToExchangeMyInterviewSkillTraingWithOtherSkills_BusinessPresentationsSellingHourlyBasisServiceOn_SiteCreditHiddenshouldBeAddedSuccessfully(string p0, string i, string p2, string p3, string p4, string p5, string p6, string p7, Decimal p8, int p9, string p10, string p11, string p12, string p13, int p14, string p15)
+        private AddShareSkillModel newShareSkill(string Title, string Description, string Category, string SubCategory, string Tags, string ServiceType, string LocationType, string StartDate, string EndDate, string SkillTrade, string SkillExchange, string Credit, string Active, string MonTime, string TueTime, string WedTime, string ThurTime, string FriTime, string SatTime)
         {
-            throw new PendingStepException();
+            AddShareSkillModel addShareSkillModel = new AddShareSkillModel();
+            addShareSkillModel.Title = Title;
+            addShareSkillModel.Description = Description;
+            addShareSkillModel.Category = Category;
+            addShareSkillModel.Subcategory = SubCategory;
+            addShareSkillModel.Tags = Tags.Split(',');
+            addShareSkillModel.ServiceType = ServiceType;
+            addShareSkillModel.LocationType = LocationType;
+            addShareSkillModel.StartDate = StartDate;
+            addShareSkillModel.EndDate = EndDate;
+            addShareSkillModel.SkillTrade = SkillTrade;
+            addShareSkillModel.SkillExchange = SkillExchange.Split(',');
+            addShareSkillModel.Credit = Credit;
+            addShareSkillModel.Active = Active;           
+            var availableDays = new List<AvailableDay>();
+            var availableDayColumns = new string[] { MonTime, TueTime, WedTime, ThurTime, FriTime, SatTime};
+            for (int j = 0; j < availableDayColumns.Length; j++)
+            {
+                var time = availableDayColumns[j];
+                if (time != "")
+                {
+                    var hours = time.Split('-');
+                    var startTime = hours[0];
+                    var endTime = "";
+                    if (hours.Length > 1)
+                    {
+                        endTime = hours[1];
+                    }
+                    availableDays.Add(new AvailableDay(j + 2, startTime, endTime));
+                }
+
+            }
+            addShareSkillModel.AvailableDays = availableDays.ToArray(); 
+            return addShareSkillModel;
         }
 
-        [When(@"I click on add button and input valid '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
-        public void WhenIClickOnAddButtonAndInputValid(string p0, string p1, string p2, string p3, string p4, string p5, string p6)
+        [When(@"I click on add button and input valid '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
+        public void WhenIClickOnAddButtonAndInputValid(string Title, string Description, string Category, string SubCategory, string Tags, string ServiceType, string LocationType, string StartDate, string EndDate, string SkillTrade, string SkillExchange, string Credit, string Active, string MonTime, string TueTime, string WedTime, string ThurTime, string FriTime, string SatTime)
         {
-            throw new PendingStepException();
+            var model = newShareSkill(Title, Description, Category, SubCategory, Tags, ServiceType, LocationType, StartDate, EndDate, SkillTrade, SkillExchange, Credit, Active, MonTime, TueTime, WedTime, ThurTime, FriTime, SatTime);
+
+            //Add new share skill with valid details
+            commonDriver.addNewShareSkillPage.CreateShareSkill(model);
         }
 
-        [Then(@"The new share skill with '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)' should be added successfully")]
-        public void ThenTheNewShareSkillWithShouldBeAddedSuccessfully(string p0, string p1, string p2, string p3, string p4, string p5, string p6)
+        [Then(@"The new share skill with '([^']*)', '([^']*)'should be added successfully")]
+        public void ThenTheNewShareSkillWithShouldBeAddedSuccessfully(string Title, string Category)
+            {
+                string[] addedSkill = commonDriver.addNewShareSkillPage.GetFirstSkill();
+                Assert.AreEqual(Title, addedSkill[0], "Actual and expected skill record do not match.");
+                Assert.AreEqual(Category, addedSkill[1], "Actual and expected skill record do not match.");
+            }
+
+       
+        [When(@"I click on add button and input invalid '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
+        public void WhenIClickOnAddButtonAndInputInvalid(string Title, string Description, string Category, string SubCategory, string Tags, string ServiceType, string LocationType, string StartDate, string EndDate, string SkillTrade, string SkillExchange, string Credit, string Active, string MonTime, string TueTime, string WedTime, string ThurTime, string FriTime, string SatTime)
         {
-            throw new PendingStepException();
+            var model = newShareSkill(Title, Description, Category, SubCategory, Tags, ServiceType, LocationType, StartDate, EndDate, SkillTrade, SkillExchange, Credit, Active, MonTime, TueTime, WedTime, ThurTime, FriTime, SatTime);
+            //Add new share skill with valid details
+            commonDriver.addNewShareSkillPage.CreateShareSkill(model);
         }
 
-        [When(@"I click on add button and input invalid '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
-        public void WhenIClickOnAddButtonAndInputInvalid(string p0, string programming, string business, string presentations, string selling, string p5, string p6, string p7, string p8, string credit, string p10, string p11, string hidden)
+        [Then(@"The new share skill with invalid'([^']*)', '([^']*)'should be added failed")]
+        public void ThenTheNewShareSkillWithInvalidShouldBeAddedFailed(string Title, string Category)
         {
-            throw new PendingStepException();
+            //Check if the new share skill has been added failed
+            string checkErrorPopUpMessage = commonDriver.addNewShareSkillPage.GetErrorPopUpMessage();
+            Assert.AreEqual("Please complete the form correctly.", checkErrorPopUpMessage, "Actual and expected skill record do not match.");
         }
 
-        [Then(@"The new share skill with invalid'([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'should be added failed")]
-        public void ThenTheNewShareSkillWithInvalidShouldBeAddedFailed(string p0, string programming, string business, string presentations, string selling, string p5, string p6, string p7, string p8, string credit, string p10, string p11, string hidden)
-        {
-            throw new PendingStepException();
-        }
+
     }
 }

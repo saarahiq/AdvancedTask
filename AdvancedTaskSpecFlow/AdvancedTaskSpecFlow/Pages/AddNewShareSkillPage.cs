@@ -46,7 +46,7 @@ namespace AdvancedTaskSpecFlow.Pages
             if (serviceType == "Hourly basis service")
                 hourlyServiceType.Click();
             else
-                oneoffServiceType.Click();
+                oneOffServiceType.Click();
         }
         private void SetLocationTyppe(string locationType)
         {
@@ -105,7 +105,7 @@ namespace AdvancedTaskSpecFlow.Pages
         private ICollection<IWebElement> subcategoryOptions => driver.FindElements(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[3]/div[2]/div/div[2]/div[1]/select/option"));
         private IWebElement tagsTextbox => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[4]/div[2]/div/div/div/div/input"));
         private IWebElement hourlyServiceType => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[5]/div[2]/div[1]/div[1]/div/input"));
-        private IWebElement oneoffServiceType => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[5]/div[2]/div[1]/div[2]/div/input"));
+        private IWebElement oneOffServiceType => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[5]/div[2]/div[1]/div[2]/div/input"));
         private IWebElement onsiteLocationType => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[6]/div[2]/div/div[1]/div/input"));
         private IWebElement onlineLocationType => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[6]/div[2]/div/div[2]/div/input"));
         private IWebElement chooseStartDate => driver.FindElement(By.XPath("//*[@id=\"service-listing-section\"]/div[2]/div/form/div[7]/div[2]/div/div[1]/div[2]/input"));

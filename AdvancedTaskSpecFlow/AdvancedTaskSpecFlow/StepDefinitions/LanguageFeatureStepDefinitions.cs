@@ -11,7 +11,6 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
     public class LanguageFeatureStepDefinitions
     {
         private readonly CommonDriver commonDriver;
-        private string[] deletedLanguage = new string[0];
         public LanguageFeatureStepDefinitions(CommonDriver commonDriver)
         {
             this.commonDriver = commonDriver;

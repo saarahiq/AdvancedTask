@@ -75,11 +75,34 @@ namespace AdvancedTaskSpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("01) I can add new share skill with valid details except avaiable days.")]
+        [NUnit.Framework.DescriptionAttribute("01) I can add new share skill with valid details.")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        [NUnit.Framework.TestCaseAttribute("Interview skill exchange", "I\'d like to exchange my interview skill traing with other skills.", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", null)]
-        [NUnit.Framework.TestCaseAttribute("Web design", "I\'ve been working as a dancing teacher for ten years.", "Programming&Tech", "Web&Mobile App", "Design", "One-off service", "Online", "1/1/2024", "31/1/2024", "SkillExchange", "software testing", "", "Active", null)]
-        public void _01ICanAddNewShareSkillWithValidDetailsExceptAvaiableDays_(string title, string description, string category, string subCategory, string tags, string serviceType, string locationType, string startDate, string endDate, string skillTrade, string skillExchange, string credit, string active, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Interview skill exchange", "I like to exchange my interview skill traing with other skills.", "Business", "Presentations", "Selling,Interview", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("Web design", "I work as a dancing teacher for ten years.", "Programming & Tech", "Web & Mobile App", "Design", "One-off service", "Online", "01/01/2024", "31/01/2024", "Skill-exchange", "software testing", "", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("Singing Teaching", "I am a singing teacher.", "Music & Audio", "Voice Over", "Teaching", "", "", "12/08/2024", "", "Credit", "", "5", "", "9:00-17:00", "", "9:00-17:00", "", "9:00-17:00", "", null)]
+        [NUnit.Framework.TestCaseAttribute("Game Playing", "I like to play games.", "Fun & Lifestyle", "Gaming", "Gaming,Fun", "", "", "12/12/2024", "", "", "dancing", "", "", "12:00", "", "12:00", "12:00", "12:00", "12:00", null)]
+        [NUnit.Framework.TestCaseAttribute("Essay Writing", "I can help you in writing essay.", "Writing & Translation", "Creative Writing", "Writing", "", "", "12/09/2025", "31/01/2026", "Credit", "", "8", "", "12:00", "12:00", "12:00", "12:00", "12:00", "12:00-17:00", null)]
+        public void _01ICanAddNewShareSkillWithValidDetails_(
+                    string title, 
+                    string description, 
+                    string category, 
+                    string subCategory, 
+                    string tags, 
+                    string serviceType, 
+                    string locationType, 
+                    string startDate, 
+                    string endDate, 
+                    string skillTrade, 
+                    string skillExchange, 
+                    string credit, 
+                    string active, 
+                    string monTime, 
+                    string tueTime, 
+                    string wedTime, 
+                    string thurTime, 
+                    string friTime, 
+                    string satTime, 
+                    string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "tag1"};
@@ -102,7 +125,13 @@ namespace AdvancedTaskSpecFlow.Features
             argumentsOfScenario.Add("SkillExchange", skillExchange);
             argumentsOfScenario.Add("Credit", credit);
             argumentsOfScenario.Add("Active", active);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) I can add new share skill with valid details except avaiable days.", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("MonTime", monTime);
+            argumentsOfScenario.Add("TueTime", tueTime);
+            argumentsOfScenario.Add("WedTime", wedTime);
+            argumentsOfScenario.Add("ThurTime", thurTime);
+            argumentsOfScenario.Add("FriTime", friTime);
+            argumentsOfScenario.Add("SatTime", satTime);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) I can add new share skill with valid details.", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -118,71 +147,49 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 9
  testRunner.When(string.Format("I click on add button and input valid \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'" +
-                            "{6}\', \'{7}\', \'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\'", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "{6}\', \'{7}\', \'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\',\'{13}\', \'{14}\', \'{15}\', \'{16}\'" +
+                            ", \'{17}\', \'{18}\'", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active, monTime, tueTime, wedTime, thurTime, friTime, satTime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
- testRunner.Then(string.Format("The new share skill with \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\', " +
-                            "\'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\'should be added successfully", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("The new share skill with \'{0}\', \'{1}\'should be added successfully", title, category), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("02) I can add new share skill with valid details and avaiable days.")]
-        [NUnit.Framework.TestCaseAttribute("9:00-17:00", "", "9:00-17:00", "", "9:00-17:00", "", "", null)]
-        [NUnit.Framework.TestCaseAttribute("12:00", "12:00", "12:00", "12:00", "12:00", "", "", null)]
-        [NUnit.Framework.TestCaseAttribute("12:00", "12:00", "12:00", "12:00", "12:00", "12:00-17:00", "12:00-17:00", null)]
-        public void _02ICanAddNewShareSkillWithValidDetailsAndAvaiableDays_(string monTime, string tueTime, string wedTime, string thurTime, string friTime, string satTime, string sunTime, string[] exampleTags)
-        {
-            string[] tagsOfScenario = exampleTags;
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("MonTime", monTime);
-            argumentsOfScenario.Add("TueTime", tueTime);
-            argumentsOfScenario.Add("WedTime", wedTime);
-            argumentsOfScenario.Add("ThurTime", thurTime);
-            argumentsOfScenario.Add("FriTime", friTime);
-            argumentsOfScenario.Add("SatTime", satTime);
-            argumentsOfScenario.Add("SunTime", sunTime);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) I can add new share skill with valid details and avaiable days.", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 17
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 18
- testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 19
- testRunner.When(string.Format("I click on add button and input valid \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'" +
-                            "{6}\'", monTime, tueTime, wedTime, thurTime, friTime, satTime, sunTime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 20
- testRunner.Then(string.Format("The new share skill with \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\' should b" +
-                            "e added successfully", monTime, tueTime, wedTime, thurTime, friTime, satTime, sunTime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("03) I can not add new share skill with invalid details.")]
-        [NUnit.Framework.TestCaseAttribute("", "programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", null)]
-        [NUnit.Framework.TestCaseAttribute("!QA", "programming", "Programming&Tech", "Web&Mobile App", "Design", "One-off service", "Online", "1/1/2024", "31/1/2024", "SkillExchange", "testing", "", "Active", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "", "Programming&Tech", "Web&Mobile App", "Design", "One-off service", "Online", "1/1/2024", "31/1/2024", "SkillExchange", "testing", "", "Active", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "!programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Programming", "Web&Mobile App", "Design", "One-off service", "Online", "1/1/2024", "31/1/2024", "SkillExchange", "testing", "", "Active", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Programming&Tech", "Mobile", "Design", "One-off service", "Online", "1/1/2024", "31/1/2024", "Credit", "", "5", "Active", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Programming", "Web&Mobile App", "", "One-off service", "Online", "1/1/2024", "31/1/2024", "Credit", "", "5", "Hidden", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Programming&Tech", "Web&Mobile App", "Design", "One-off service", "Online", "1/1/2023", "31/1/2024", "Credit", "", "6", "Active", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "SkillExchange", "", "", "Hidden", null)]
-        [NUnit.Framework.TestCaseAttribute("QA", "programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", null)]
-        public void _03ICanNotAddNewShareSkillWithInvalidDetails_(string title, string description, string category, string subCategory, string tags, string serviceType, string locationType, string startDate, string endDate, string skillTrade, string skillExchange, string credit, string active, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("02) I can not add new share skill with invalid details.")]
+        [NUnit.Framework.TestCaseAttribute("", "programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("!QA", "programming", "Programming & Tech", "Web & Mobile App", "Design", "One-off service", "Online", "01/01/2024", "31/01/2024", "Skill-exchange", "testing", "", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("IT", "", "Programming & Tech", "Web & Mobile App", "Design", "One-off service", "Online", "01/01/2024", "31/01/2024", "Skill-exchange", "testing", "", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("PHD", "progr*aming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("BA", "!programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Credit", "", "9", "Hidden", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("DA", "programming", "Programming", "Web & Mobile App", "Design", "One-off service", "Online", "01/01/2024", "31/01/2024", "Skill-exchange", "testing", "", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("MA", "programming", "Programming & Tech", "Mobile", "Design", "One-off service", "Online", "01/01/2024", "31/01/2024", "Credit", "", "5", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("GD", "programming", "Programming & Tech", "Web & Mobile App", "", "One-off service", "Online", "01/01/2024", "31/01/2024", "Credit", "", "5", "Hidden", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("PGD", "programming", "Programming & Tech", "Web & Mobile App", "Design", "One-off service", "Online", "01/01/2023", "31/01/2024", "Credit", "", "6", "Active", "", "", "", "", "", "", null)]
+        [NUnit.Framework.TestCaseAttribute("Dev", "programming", "Business", "Presentations", "Selling", "Hourly basis service", "On-site", "12/12/2023", "", "Skill-exchange", "", "", "Hidden", "", "", "", "", "", "", null)]
+        public void _02ICanNotAddNewShareSkillWithInvalidDetails_(
+                    string title, 
+                    string description, 
+                    string category, 
+                    string subCategory, 
+                    string tags, 
+                    string serviceType, 
+                    string locationType, 
+                    string startDate, 
+                    string endDate, 
+                    string skillTrade, 
+                    string skillExchange, 
+                    string credit, 
+                    string active, 
+                    string monTime, 
+                    string tueTime, 
+                    string wedTime, 
+                    string thurTime, 
+                    string friTime, 
+                    string satTime, 
+                    string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -199,8 +206,14 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("SkillExchange", skillExchange);
             argumentsOfScenario.Add("Credit", credit);
             argumentsOfScenario.Add("Active", active);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("03) I can not add new share skill with invalid details.", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 28
+            argumentsOfScenario.Add("MonTime", monTime);
+            argumentsOfScenario.Add("TueTime", tueTime);
+            argumentsOfScenario.Add("WedTime", wedTime);
+            argumentsOfScenario.Add("ThurTime", thurTime);
+            argumentsOfScenario.Add("FriTime", friTime);
+            argumentsOfScenario.Add("SatTime", satTime);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) I can not add new share skill with invalid details.", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 22
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -210,16 +223,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 29
+#line 23
  testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 30
+#line 24
  testRunner.When(string.Format("I click on add button and input invalid \'{0}\', \'{1}\',\'{2}\', \'{3}\', \'{4}\', \'{5}\',\'" +
-                            "{6}\', \'{7}\', \'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\'", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "{6}\', \'{7}\', \'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\',\'{13}\', \'{14}\', \'{15}\', \'{16}\'" +
+                            ", \'{17}\', \'{18}\'", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active, monTime, tueTime, wedTime, thurTime, friTime, satTime), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 31
- testRunner.Then(string.Format("The new share skill with invalid\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', " +
-                            "\'{7}\', \'{8}\', \'{9}\', \'{10}\', \'{11}\', \'{12}\'should be added failed", title, description, category, subCategory, tags, serviceType, locationType, startDate, endDate, skillTrade, skillExchange, credit, active), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
+ testRunner.Then(string.Format("The new share skill with invalid\'{0}\', \'{1}\'should be added failed", title, category), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -25,16 +25,16 @@ namespace AdvancedTaskSpecFlow.Models
         public string Category { get; set; }
         public string Subcategory { get; set; }
 
-        public string[] Tags { get; set; }
+        public string[] Tags { get; set; } = new string[0];
         public string ServiceType { get; set; }
         public string LocationType { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string SkillTrade { get; set; }
-        public string[] SkillExchange { get; set; }
+        public string[] SkillExchange { get; set; } = new string[0];
         public string Credit { get; set; }
         public string Active { get; set; }
-        public AvailableDay[] AvailableDays { get; set; }
+        public AvailableDay[] AvailableDays { get; set; } = new AvailableDay[0];
     }
 
 }
