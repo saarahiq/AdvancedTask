@@ -1,4 +1,5 @@
-﻿using AdvancedTaskSpecFlow.Utilities;
+﻿using AdvancedTaskSpecFlow.Pages.ManageRequestPageTabs;
+using AdvancedTaskSpecFlow.Utilities;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -16,6 +17,8 @@ namespace AdvancedTaskSpecFlow.Pages
         {
             this.driver = driver;
         }
+        private IWebElement manageRequest => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]"));
+        private IWebElement sentRequest => driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]/div/a[2]"));
         public void goToProfileButton()
         {
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/a[2]", 15);
@@ -33,7 +36,7 @@ namespace AdvancedTaskSpecFlow.Pages
 
 
     }
-    public void goToManageRequestsReceivedRequestPage()
+        public void goToManageRequestsReceivedRequestPage()
         {
             Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]", 15);
             //Hover over Manage Requests button
@@ -42,6 +45,18 @@ namespace AdvancedTaskSpecFlow.Pages
             actions.MoveToElement(manageRequestsHoverButton).Perform();
             // Click on Received Request button
             manageRequestsHoverButton.FindElement(By.LinkText("Received Requests")).Click();
+        }
+
+        public void GoToSentRequestPage()
+        {
+
+            //Creating object of an Actions class
+            Actions action = new Actions(driver);
+            //Performing the mouse hover action on Manage Requests
+            action.MoveToElement(manageRequest).Perform();
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[1]/div/div[1]/div/a[2]", 10);
+            sentRequest.Click();
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"sent-request-section\"]/div[2]/div[1]/table/thead/tr/th[1]", 10);
         }
 
         public void goToNotificationsPage()
