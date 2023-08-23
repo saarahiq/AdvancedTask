@@ -92,7 +92,7 @@ namespace AdvancedTaskSpecFlow.Utilities
 
         public void Dispose()
         {
-            //driver.Dispose();
+            driver.Dispose();
         }
     }
 }

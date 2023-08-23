@@ -20,7 +20,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
         [When(@"Navigate to Sent Requests tab")]
         public void WhenNavigateToSentRequestsTab()
         {
-            //Naviaget to SEnt Requests page
+            //Naviaget to Sent Requests page
             commonDriver.navigationMenu.GoToSentRequestPage();
         }
 

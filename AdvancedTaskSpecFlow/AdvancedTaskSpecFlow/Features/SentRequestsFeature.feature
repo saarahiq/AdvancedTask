@@ -1,7 +1,7 @@
 ﻿Feature: SentRequestsFeature
 
 As a Mars user, I'd like to sort my SentRequests by Category, Title, Recipient, Status, Type, Date and Actions.
-As a Mars user, I can Withraw, Complete and Review my SentRequests.
+As a Mars user, I can Withraw my SentRequests.
 
 
 @tag1

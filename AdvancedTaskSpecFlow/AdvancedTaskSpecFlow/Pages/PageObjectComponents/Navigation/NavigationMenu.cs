@@ -58,7 +58,7 @@ namespace AdvancedTaskSpecFlow.Pages
             sentRequest.Click();
             Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"sent-request-section\"]/div[2]/div[1]/table/thead/tr/th[1]", 10);
         }
-
+       
         public void goToNotificationsPage()
         {
             IWebElement notificationsHoverButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div"));
@@ -68,10 +68,11 @@ namespace AdvancedTaskSpecFlow.Pages
             Actions actions = new Actions(driver);
             actions.MoveToElement(notificationsHoverButton).Perform();
             //Click on See All Option (copy See All XPath)
-            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a", 10);
-            notificationsHoverButton.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div[2]/span/div/div[2]/div/center/a")).Click();
-        }
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div/span/div/div[2]/div/center/a", 10);
+            notificationsHoverButton.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/div/div/span/div/div[2]/div/center/a")).Click();
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"notification-section\"]/div[2]/div/div/div[3]/div[2]/span/span/div/div[1]/div/div/div[2]/div[1]/a/span/h4", 10);
 
+        }
         public void goToChatPage()
         {
             IWebElement chatButton = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[2]/div/a[1]"));

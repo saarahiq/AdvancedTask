@@ -36,8 +36,7 @@ namespace AdvancedTaskSpecFlow.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "SentRequestsFeature", "As a Mars user, I\'d like to sort my SentRequests by Category, Title, Recipient, S" +
-                    "tatus, Type, Date and Actions.\r\nAs a Mars user, I can Withraw, Complete and Revi" +
-                    "ew my SentRequests.", ProgrammingLanguage.CSharp, featureTags);
+                    "tatus, Type, Date and Actions.\r\nAs a Mars user, I can Withraw my SentRequests.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
