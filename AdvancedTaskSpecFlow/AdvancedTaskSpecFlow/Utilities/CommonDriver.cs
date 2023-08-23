@@ -29,6 +29,7 @@ namespace AdvancedTaskSpecFlow.Utilities
         public Education educationPage;
         public Certification certificationPage;
         public NavigationMenu navigationMenu;
+        public SideBars sideBars;
 
         public static string ScreenshotPath = Resources.ScreenshotPath;
         public static string ReportPath = Resources.ExtentReportPath;
@@ -62,6 +63,7 @@ namespace AdvancedTaskSpecFlow.Utilities
             this.educationPage = new Education(driver);
             this.certificationPage = new Certification(driver);
             this.navigationMenu = new NavigationMenu(driver);
+            this.sideBars = new SideBars(driver);
         }
 
         [AfterTestRun]
