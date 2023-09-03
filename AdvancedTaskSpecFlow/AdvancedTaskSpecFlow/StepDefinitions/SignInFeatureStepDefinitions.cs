@@ -30,7 +30,7 @@ namespace AdvancedTaskSpecFlow.StepDefinitions
         public void GivenLaunchMarsPortalAndLoginWithDefaultUser()
         {
             GivenLaunchMarsPortal();
-            this.loginSuccess = commonDriver.signInPage.SignIn("mars.advanced@example.com", "123456");
+            this.loginSuccess = commonDriver.signInPage.SignIn("ada@example.com", "123456");
         }
 
         [When(@"Input valid '([^']*)' and '([^']*)'")]

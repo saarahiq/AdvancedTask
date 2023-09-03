@@ -61,7 +61,7 @@ namespace AdvancedTaskSpecFlow {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTaskSpecFlow\AdvancedTaskSpecFlow\Reports\ExtentReports\TestReports.html.
+        ///   Looks up a localized string similar to C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTaskSpecFlow\Report.
         /// </summary>
         internal static string ExtentReportPath {
             get {
@@ -70,7 +70,7 @@ namespace AdvancedTaskSpecFlow {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\saara\source\repos\AdvancedTask\AdvancedTaskSpecFlow\AdvancedTaskSpecFlow\Screenshots\.
+        ///   Looks up a localized string similar to C:\Users\adawh\OneDrive\Documents\AdvancedTask\AdvancedTaskSpecFlow\Report\Screenshot.
         /// </summary>
         internal static string ScreenshotPath {
             get {

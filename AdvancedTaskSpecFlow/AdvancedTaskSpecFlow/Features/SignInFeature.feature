@@ -1,10 +1,11 @@
 ﻿Feature: SignInFeature
 
 As a user, I'd like to sign in Mars portal successfully.
+As a user, I can't sign in Mars portal with invalid details.
 
 @tag1
 
-Scenario: I sign in Mars portal with default user
+Scenario: 01) I sign in Mars portal with default user
 	Given Launch Mars portal and login with default user
 	Then I signed in  Mars portal successfully
 
@@ -19,7 +20,7 @@ Scenario Outline: I sign in Mars portal successfully with valid details
 	|ada520@example.com         |abcdefg  |
 
 
-Scenario Outline: I sign in Mars portal failed with invalid details
+Scenario Outline: 02) I sign in Mars portal failed with invalid details
 	Given Launch Mars portal
 	When  Input invalid '<email>' and '<password>'
 	Then I signed in  Mars portal failed

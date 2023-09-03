@@ -20,23 +20,22 @@ namespace AdvancedTaskSpecFlow.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SignInFeature")]
-    public partial class SignInFeatureFeature
+    [NUnit.Framework.DescriptionAttribute("SideBarsFeature")]
+    public partial class SideBarsFeatureFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "SignInFeature.feature"
+#line 1 "SideBarsFeature.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "SignInFeature", "As a user, I\'d like to sign in Mars portal successfully.\r\nAs a user, I can\'t sign" +
-                    " in Mars portal with invalid details.", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "SideBarsFeature", "As a Mars user, I can edit Availability, Hours and EarnTarget.", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,15 +74,23 @@ namespace AdvancedTaskSpecFlow.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("01) I sign in Mars portal with default user")]
+        [NUnit.Framework.DescriptionAttribute("01) I can edit availability")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public void _01ISignInMarsPortalWithDefaultUser()
+        [NUnit.Framework.TestCaseAttribute("Part Time", null)]
+        [NUnit.Framework.TestCaseAttribute("Full Time", null)]
+        public void _01ICanEditAvailability(string availability, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "tag1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) I sign in Mars portal with default user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 8
+            argumentsOfScenario.Add("Availability", availability);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("01) I can edit availability", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -93,28 +100,31 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 9
+#line 7
  testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 10
- testRunner.Then("I signed in  Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 8
+ testRunner.When(string.Format("select \'{0}\'", availability), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.Then("The availability should be edited successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I sign in Mars portal successfully with valid details")]
-        [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "123456", null)]
-        [NUnit.Framework.TestCaseAttribute("ada520@example.com", "abcdefg", null)]
-        public void ISignInMarsPortalSuccessfullyWithValidDetails(string email, string password, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("02) I can edit hours")]
+        [NUnit.Framework.TestCaseAttribute("As needed", null)]
+        [NUnit.Framework.TestCaseAttribute("Less than 30hours a week", null)]
+        [NUnit.Framework.TestCaseAttribute("More than 30hours a week", null)]
+        public void _02ICanEditHours(string hours, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("email", email);
-            argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I sign in Mars portal successfully with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 12
+            argumentsOfScenario.Add("Hours", hours);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) I can edit hours", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -124,33 +134,31 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 13
- testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 17
+ testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 14
- testRunner.When(string.Format("Input valid \'{0}\' and \'{1}\'", email, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 18
+ testRunner.When(string.Format("I can select \'{0}\'", hours), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
- testRunner.Then("I signed in  Mars portal successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 19
+ testRunner.Then("The hours should be edited successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("02) I sign in Mars portal failed with invalid details")]
-        [NUnit.Framework.TestCaseAttribute("", "123456", null)]
-        [NUnit.Framework.TestCaseAttribute("advanced.taskexample.com", "123456", null)]
-        [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "", null)]
-        [NUnit.Framework.TestCaseAttribute("advanced.task@example.com", "1234567", null)]
-        public void _02ISignInMarsPortalFailedWithInvalidDetails(string email, string password, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("03) I can edit earn target")]
+        [NUnit.Framework.TestCaseAttribute("Less than $500 per month", null)]
+        [NUnit.Framework.TestCaseAttribute("Between $500 and $1000 per month", null)]
+        [NUnit.Framework.TestCaseAttribute("More than $1000 per month", null)]
+        public void _03ICanEditEarnTarget(string earnTarget, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("email", email);
-            argumentsOfScenario.Add("password", password);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("02) I sign in Mars portal failed with invalid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 23
+            argumentsOfScenario.Add("earnTarget", earnTarget);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("03) I can edit earn target", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -160,14 +168,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 24
- testRunner.Given("Launch Mars portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 28
+ testRunner.Given("Launch Mars portal and login with default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 25
- testRunner.When(string.Format("Input invalid \'{0}\' and \'{1}\'", email, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 29
+ testRunner.When(string.Format("I can edit \'{0}\'", earnTarget), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 26
- testRunner.Then("I signed in  Mars portal failed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 30
+ testRunner.Then("The earn target should be edited successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
