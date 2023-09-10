@@ -31,4 +31,10 @@
     <Folder Include="Support\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
